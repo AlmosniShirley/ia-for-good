@@ -114,7 +114,7 @@
     if (val("environnement")) infos.push("### Ce dont j'ai besoin pour bien travailler\n" + clean(val("environnement")));
     parts.push("## 3. Informations complémentaires\n" + (infos.length ? infos.join("\n") : "Aucune information complémentaire fournie."));
 
-    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et % de matching), puis respecte ta structure en 16 points : une section de niveau 2 (##) par point, numérotée de 1 à 16.");
+    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et % de matching), puis respecte ta structure en 16 points, ni plus ni moins : une section de niveau 2 (##) par point, numérotée de 1 à 16, le point 16 étant « Ce qu'il faut éviter ». Si tu proposes des questions à poser en entretien, intègre-les dans le point 16 au lieu d'ajouter une section.");
     return parts.join("\n\n");
   }
 
