@@ -4,7 +4,7 @@
 window.DECODEUR = {
   // Adresse du relais Cloudflare (ex. "https://ia-for-good-decodeur.xxx.workers.dev").
   // Vide = la page affiche « Le Décodeur ouvre très bientôt ».
-  API_URL: "",
+  API_URL: "https://ia-for-good-decodeur.shirley-chiche.workers.dev",
 
   // true = un code d'accès est demandé (code personnel, puis code Payhip).
   CODE_REQUIS: true,
