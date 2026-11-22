@@ -269,3 +269,45 @@ button.btn { cursor: pointer; font-family: inherit; }
   .partie { border: 0; padding: 0; margin: 0 0 5mm; break-inside: auto; }
   .partie h2 { border-bottom: 1px solid var(--line); padding-bottom: 1mm; break-after: avoid; }
 }
+
+/* =====================================================================
+   RUBRIQUES (v4) : produits vedettes et sous-rubriques
+   ===================================================================== */
+.section-titre { display: flex; gap: 14px; align-items: flex-start; }
+.section-ico { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--grad); color: #fff; margin-top: 2px; }
+.section-ico svg { width: 22px; height: 22px; }
+.pilier-agent .ico { background: var(--grad); color: #fff; }
+
+.pile { display: grid; gap: 18px; }
+.vedette {
+  display: grid; grid-template-columns: minmax(220px, 300px) 1fr; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow);
+}
+.vedette-panneau {
+  background: var(--grad); color: #fff; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
+}
+.vedette-panneau::after { content: ""; position: absolute; right: -60px; bottom: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.10); }
+.vedette-ico { width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+.vedette-ico svg { width: 28px; height: 28px; }
+.vedette-kicker { margin: 8px 0 0; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .9; }
+.vedette-pour { margin: 0; font-weight: 600; font-size: .95rem; line-height: 1.4; }
+.vedette .corps { padding: 24px 26px 24px; }
+.vedette h3 { font-size: 1.35rem; }
+.obtenez { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 7px; }
+.obtenez li { display: flex; gap: 10px; align-items: flex-start; font-size: .92em; }
+.obtenez svg { flex: none; width: 18px; height: 18px; color: var(--ok); margin-top: 3px; }
+.vedette .actions .auteur { margin-left: auto; }
+@media (max-width: 720px) {
+  .vedette { grid-template-columns: 1fr; }
+  .vedette-panneau { padding: 20px; }
+  .vedette .corps { padding: 20px; }
+  .vedette .actions .auteur { margin-left: 0; width: 100%; }
+}
+
+.sous + .sous { margin-top: 26px; }
+.sous-titre { font-size: 1.02rem; font-weight: 700; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; color: var(--ink); }
+.sous-titre .n { font-size: .75rem; background: var(--surface-2); color: var(--ink-2); padding: 0 8px; border-radius: 999px; font-weight: 600; }
+.section + .section { border-top: 1px solid var(--line); }
+.vedette h3 { margin: 0; line-height: 1.3; font-weight: 800; }
+.vedette .desc { margin: 0; color: var(--ink-2); font-size: .95em; }
+.vedette .auteur { font-size: .78rem; color: var(--ink-2); }

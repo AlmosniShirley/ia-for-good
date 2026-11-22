@@ -2,11 +2,13 @@
    CATALOGUE IA FOR GOOD — c'est le seul fichier à modifier !
    =====================================================================
 
-   La plateforme compte 4 espaces (champ "espace") :
-   - "agents"        : vos produits Agents / outils IA
-   - "infographies"  : vos infographies marchés
-   - "etudes"        : vos études (neuroatypisme, IA & travail…)
-   - "autres"        : tout le reste (guides, carrousels, outils…)
+   Rubriques (champ "espace") — voir la liste "espaces" plus bas :
+   - "analyse-parcours" : Agent IA · Analyse de parcours (Le Bon Angle)
+   - "scan-annonce"     : Agent IA · Scan d'annonce (Décodeur d'offres)
+   - "documentation-ia" : livres blancs (type "livre blanc") et
+                          infographies (type "infographie") sur l'IA
+   - "neuro"            : neuroatypisme & inclusion
+   - "autres"           : tout le reste
 
    POUR AJOUTER UN CONTENU : copiez un bloc { ... } de la liste CONTENUS
    (de l'accolade ouvrante à la virgule qui suit l'accolade fermante),
@@ -14,7 +16,7 @@
 
    CHAMPS COMMUNS :
    - titre        : le titre affiché (obligatoire)
-   - espace       : "agents", "infographies", "etudes" ou "autres"
+   - espace       : l'identifiant d'une rubrique (voir ci-dessus)
    - theme        : l'identifiant d'un thème ci-dessous (ex. "neuro")
    - type         : ex. "agent IA", "infographie", "étude", "livre blanc", "carrousel"
    - description  : une ou deux phrases de présentation
@@ -33,6 +35,7 @@
    - statut       : "disponible", "bêta" ou "bientôt"
    - action       : le texte du bouton, ex. "Lancer l'analyse"
    - pour         : à qui il s'adresse, ex. "Candidats Tech"
+   - points       : la liste de ce que l'on obtient (affichée en puces)
 
    ⚠️ Tout ce qui est dans ce dépôt est public : ne déposez jamais la
       version complète d'un document payant. Elle va uniquement sur Payhip.
@@ -43,33 +46,55 @@ window.PLATEFORME = {
   accroche: "L'IA au service",
   accrocheAccent: "de l'humain.",
   sousTitre:
-    "Des agents IA utiles, des infographies pour lire le marché et des études pour comprendre le travail tel qu'il est vécu, notamment par les personnes neuroatypiques. Sourcé, actionnable, inclusif.",
+    "Deux agents IA pour avancer dans votre carrière (analyser votre parcours, scanner une annonce), et une documentation pour comprendre l'IA au travail et le neuroatypisme. Sourcé, actionnable, inclusif.",
   contact: "mailto:shirley.chiche@buildrh.co",
 
-  // Textes des quatre espaces (onglets et en-têtes de section)
+  // LES RUBRIQUES (dans l'ordre d'affichage)
+  // - vedette: true      → grande carte (pour un produit phare, ex. un agent)
+  // - sousRubriques      → regroupe les contenus par "type" (livre blanc, infographie…)
+  // - masquerSiVide: true → la rubrique n'apparaît que lorsqu'elle a du contenu
+  // icone possible : "parcours", "scan", "doc", "neuro", "autres"
   espaces: [
     {
-      id: "agents",
-      nom: "Agents & outils IA",
-      court: "Agents IA",
-      intro: "Des assistants IA conçus pour un usage précis, avec des garde-fous clairs : pas de chiffres inventés, pas de décision à votre place.",
+      id: "analyse-parcours",
+      nom: "Agent IA · Analyse de parcours",
+      court: "Analyse de parcours",
+      icone: "parcours",
+      vedette: true,
+      intro: "Votre CV face au poste que vous visez : intitulés, lisibilité ATS, clarté, et des pistes concrètes pour repositionner votre trajectoire.",
     },
     {
-      id: "infographies",
-      nom: "Infographies marchés",
-      court: "Infographies",
-      intro: "Le marché de l'emploi, des métiers et de l'IA en une page : tendances, salaires, compétences qui montent.",
+      id: "scan-annonce",
+      nom: "Agent IA · Scan d'annonce",
+      court: "Scan d'annonce",
+      icone: "scan",
+      vedette: true,
+      intro: "Une annonce, c'est une vitrine. L'agent lit ce qu'il y a derrière avant que vous ne postuliez.",
     },
     {
-      id: "etudes",
-      nom: "Études",
-      court: "Études",
-      intro: "Neuroatypisme, IA et organisation du travail : des synthèses de recherche, des retours de terrain et des actions concrètes.",
+      id: "documentation-ia",
+      nom: "Documentation IA",
+      court: "Documentation IA",
+      icone: "doc",
+      intro: "Livres blancs et infographies pour comprendre comment l'IA transforme les métiers, les organisations et le marché de l'emploi.",
+      sousRubriques: [
+        { type: "livre blanc", nom: "Livres blancs" },
+        { type: "infographie", nom: "Infographies" },
+      ],
+    },
+    {
+      id: "neuro",
+      nom: "Neuroatypisme & inclusion",
+      court: "Neuroatypisme",
+      icone: "neuro",
+      intro: "TDAH, neuroatypies et travail : comprendre, recruter et manager sans abîmer. Des actions concrètes, pas des slogans.",
     },
     {
       id: "autres",
       nom: "Autres sujets",
       court: "Autres sujets",
+      icone: "autres",
+      masquerSiVide: true,
       intro: "Guides, outils et méthodes sur les RH, l'inclusion et le recrutement.",
     },
   ],
@@ -97,13 +122,20 @@ window.CONTENUS = [
   /* ---------------- AGENTS & OUTILS IA ---------------- */
   {
     titre: "Décodeur d'offres",
-    espace: "agents",
+    espace: "scan-annonce",
     theme: "carriere",
     type: "agent IA",
     statut: "bêta",
-    pour: "Candidats et candidates Tech qui veulent voir derrière l'annonce",
+    pour: "Candidats Tech qui veulent voir derrière l'annonce",
     description:
       "Collez une offre d'emploi et votre CV : l'agent décrypte le vrai terrain de jeu, la culture derrière les mots, les red flags, la santé financière et la compatibilité neuroatypisme, puis calcule votre % de matching et rédige votre message d'approche. 16 points, méthode DEV.",
+    points: [
+      "Le vrai terrain de jeu : startup, scale-up, grand groupe, ESN, éditeur…",
+      "Les red flags (10 patterns) et les green flags, avec leur gravité",
+      "Culture, santé financière, avis Glassdoor, diversité",
+      "Compatibilité avec un fonctionnement neuroatypique",
+      "% de matching, CV à retravailler, message d'approche et questions d'entretien",
+    ],
     lien: "decodeur.html",
     action: "Décoder une offre",
     tags: ["offre d'emploi", "red flags", "matching", "CV", "neuroatypisme", "Glassdoor", "salaire"],
@@ -112,13 +144,19 @@ window.CONTENUS = [
   },
   {
     titre: "Analyse de parcours Le Bon Angle",
-    espace: "agents",
+    espace: "analyse-parcours",
     theme: "carriere",
     type: "agent IA",
     statut: "disponible",
     pour: "Profils Tech en recherche ou en transition",
     description:
       "Collez votre CV et l'offre visée : l'agent vérifie la correspondance des intitulés, note la lisibilité ATS et la clarté sur 5, et vous rend des pistes concrètes. Gratuit pendant le lancement.",
+    points: [
+      "Correspondance entre vos intitulés et le rôle visé",
+      "Notes de lisibilité ATS et de clarté, sur 5",
+      "Reformulations concrètes pour votre CV et votre LinkedIn",
+      "Priorités d'amélioration, dans l'ordre",
+    ],
     lien: "https://almosnishirley.github.io/le-bon-angle/atelier.html",
     action: "Lancer l'analyse gratuite",
     tags: ["CV", "ATS", "carrière", "Tech", "gratuit"],
@@ -126,13 +164,11 @@ window.CONTENUS = [
     auteur: "BUILD RH · Le Bon Angle",
   },
 
-  /* ---------------- INFOGRAPHIES MARCHÉS ---------------- */
-  // Ajoutez ici vos infographies (espace: "infographies").
-
-  /* ---------------- ÉTUDES ---------------- */
+  /* ---------------- DOCUMENTATION IA & NEUROATYPISME ----------------
+     Infographie : espace "documentation-ia", type "infographie". */
   {
     titre: "Neuroatypies au travail : changez le travail",
-    espace: "etudes",
+    espace: "neuro",
     theme: "neuro",
     type: "carrousel",
     description:
@@ -148,7 +184,7 @@ window.CONTENUS = [
   },
   {
     titre: "TDAH au travail",
-    espace: "etudes",
+    espace: "neuro",
     theme: "neuro",
     type: "carrousel",
     description:
@@ -164,7 +200,7 @@ window.CONTENUS = [
   },
   {
     titre: "Design organisationnel à l'ère de l'IA",
-    espace: "etudes",
+    espace: "documentation-ia",
     theme: "ia",
     type: "livre blanc",
     description:
@@ -180,7 +216,7 @@ window.CONTENUS = [
   },
   {
     titre: "Du développeur au pilote de systèmes augmentés",
-    espace: "etudes",
+    espace: "documentation-ia",
     theme: "ia",
     type: "livre blanc",
     description:
