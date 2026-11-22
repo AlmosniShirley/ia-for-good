@@ -88,8 +88,10 @@ export default {
 
     if (request.method === "OPTIONS") return new Response(null, { status: originOk ? 204 : 403, headers: cors });
     if (!originOk) return json({ error: "Origine non autorisée." }, 403);
-    if (!env.DUST_API_KEY || !env.DUST_WORKSPACE_ID || !env.DUST_AGENT_ID) {
-      return json({ error: "Le relais n'est pas encore configuré." }, 500);
+    const missing = ["DUST_API_KEY", "DUST_WORKSPACE_ID", "DUST_AGENT_ID"].filter((k) => !String(env[k] || "").trim());
+    if (missing.length) {
+      console.log("Réglages manquants :", missing.join(", "));
+      return json({ error: "Le relais n'est pas encore configuré.", manquant: missing }, 500);
     }
 
     const url = new URL(request.url);
