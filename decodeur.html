@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fbf7f8">
+  <title>Décodeur d'offres · IA FOR GOOD</title>
+  <meta name="description" content="Décodez une offre d'emploi tech au-delà de sa façade : culture, red flags, santé financière, compatibilité neuroatypisme, % de matching avec votre CV et message d'approche.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body class="page-outil">
+  <a class="skip" href="#outil">Aller au formulaire</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="marque" href="index.html" aria-label="IA FOR GOOD, accueil">
+        <svg class="marque-picto" viewBox="0 0 40 40" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5288f"/><stop offset="1" stop-color="#8a2c8e"/></linearGradient></defs>
+          <rect width="40" height="40" rx="11" fill="url(#g)"/>
+          <path d="M20 29s-8-4.6-8-10.4A4.6 4.6 0 0 1 20 16a4.6 4.6 0 0 1 8 2.6C28 24.4 20 29 20 29z" fill="#fff"/>
+          <path d="M29.5 8.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="#fff"/>
+        </svg>
+        <span class="marque-txt">IA <b>FOR GOOD</b></span>
+      </a>
+      <button id="confort" class="toggle" type="button" aria-pressed="false"><span aria-hidden="true">Aa</span> <i class="lbl" style="font-style:normal">Lecture confort</i></button>
+    </div>
+  </header>
+
+  <section class="hero hero-outil">
+    <div class="wrap">
+      <p class="sur-titre"><a href="index.html#agents">Agents & outils IA</a> · bêta</p>
+      <h1>Décodeur <span class="hl">d'offres.</span></h1>
+      <p class="lead">Une annonce, c'est une vitrine. Le Décodeur lit ce qu'il y a derrière : le vrai terrain de jeu, la culture qui transparaît dans les mots, les red flags, la santé financière, la compatibilité avec un fonctionnement neuroatypique… puis il croise tout cela avec votre CV.</p>
+      <ul class="points-cles">
+        <li><strong>16 points d'analyse</strong> selon la méthode Build RH</li>
+        <li><strong>Méthode DEV</strong> : Douter, Évaluer, Vérifier</li>
+        <li><strong>% de matching</strong>, CV à retravailler et message d'approche prêt à envoyer</li>
+      </ul>
+    </div>
+  </section>
+
+  <main id="outil" class="wrap outil" tabindex="-1">
+
+    <div id="ferme" class="encart" hidden>
+      <h2>Le Décodeur ouvre très bientôt</h2>
+      <p>Il est en cours de test. Vous voulez faire partie des premiers à l'essayer ? <a data-contact href="#">Écrivez-moi</a>.</p>
+    </div>
+
+    <div id="app">
+      <details class="encart methode">
+        <summary>Ce que contient l'analyse (16 points)</summary>
+        <ol class="seize">
+          <li>Ce que fait le produit (+ vidéos)</li><li>Vision et terrain de jeu</li><li>Culture à travers le wording</li><li>Culture de l'IA</li>
+          <li>Situation financière</li><li>Red flags (10 patterns)</li><li>Green flags</li><li>Avis Glassdoor récurrents</li>
+          <li>Diversité : neurodiversité, handicap, égalité</li><li>Compatibilité neuroatypisme</li><li>Vrais atouts vs inconvénients</li><li>% de matching avec votre profil</li>
+          <li>Salaire : dans le marché ou non</li><li>Améliorer votre CV</li><li>Message d'approche optimisé</li><li>Ce qu'il faut éviter</li>
+        </ol>
+      </details>
+
+      <form id="form" novalidate>
+        <fieldset class="bloc">
+          <legend><span class="num">1</span> L'annonce <em>obligatoire</em></legend>
+          <label for="annonce-lien">Lien de l'annonce</label>
+          <input id="annonce-lien" type="url" inputmode="url" placeholder="https://…" autocomplete="off">
+          <label for="annonce-texte">Texte complet de l'annonce <span class="aide">recommandé : certains sites (LinkedIn, Welcome to the Jungle…) bloquent la lecture automatique</span></label>
+          <textarea id="annonce-texte" rows="8" placeholder="Copiez-collez ici tout le texte de l'annonce."></textarea>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">2</span> Votre CV <em>fortement conseillé</em></legend>
+          <p class="aide-bloc">Sans CV, vous aurez une lecture de l'entreprise et du poste, mais pas de % de matching fiable ni de conseils CV personnalisés.</p>
+          <div id="dropzone" class="dropzone">
+            <input id="cv-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
+            <label for="cv-file"><strong>Déposez votre CV</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
+          </div>
+          <p id="file-status" class="statut" aria-live="polite"></p>
+          <label for="cv-text">Texte du CV <span class="aide">vous pouvez aussi le coller ici</span></label>
+          <textarea id="cv-text" rows="7"></textarea>
+          <p id="cv-count" class="compteur"></p>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">3</span> Pour aller plus loin <em>facultatif</em></legend>
+          <div class="deux">
+            <div><label for="linkedin">Profil LinkedIn</label><input id="linkedin" type="url" placeholder="https://linkedin.com/in/…"></div>
+            <div><label for="liens">GitHub, portfolio, site</label><input id="liens" type="text" placeholder="Un ou plusieurs liens"></div>
+          </div>
+          <label for="objectifs">Vos objectifs et le track souhaité</label>
+          <textarea id="objectifs" rows="3" placeholder="Ex. : rester en IC senior / passer manager, aller vers le produit, quitter les ESN…"></textarea>
+          <label for="non-nego">Vos valeurs et points non négociables</label>
+          <textarea id="non-nego" rows="3" placeholder="Ex. : télétravail 3 jours, pas de culture de l'urgence, salaire minimum, impact…"></textarea>
+          <label for="environnement">Ce dont vous avez besoin pour bien travailler <span class="aide">facultatif — aide l'analyse de compatibilité neuroatypisme, sans aucun diagnostic</span></label>
+          <textarea id="environnement" rows="2" placeholder="Ex. : consignes écrites, peu d'open space, temps de concentration protégé…"></textarea>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">4</span> Lancer l'analyse</legend>
+          <div id="code-wrap">
+            <label for="access">Code d'accès</label>
+            <input id="access" type="text" autocomplete="off" spellcheck="false">
+            <p class="aide-bloc" id="code-aide">Le Décodeur est en bêta. Pas encore de code ? <a data-contact href="#">Demandez-le</a>.</p>
+          </div>
+          <label class="case"><input id="redact" type="checkbox" checked> Masquer automatiquement mon e-mail et mon téléphone avant l'envoi</label>
+          <label class="case"><input id="consent" type="checkbox"> J'accepte que ces textes soient transmis à l'agent IA (Dust) le temps de l'analyse. Rien n'est conservé sur ce site.</label>
+          <p id="form-error" class="erreur" role="alert" hidden></p>
+          <div id="service-full" class="erreur" tabindex="-1" hidden>Le Décodeur est très demandé en ce moment et l'agent n'a pas pu être contacté. Votre code n'a pas été utilisé : réessayez un peu plus tard.</div>
+          <button id="submit-btn" class="btn btn-prim btn-grand" type="submit">Décoder l'offre</button>
+          <p class="aide-bloc">L'analyse prend en général 2 à 6 minutes : l'agent fait des recherches sur l'entreprise. Gardez la page ouverte.</p>
+        </fieldset>
+      </form>
+
+      <div id="progress" class="encart progress" tabindex="-1" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <div><strong id="progress-text">Analyse en cours…</strong><p>L'agent lit l'annonce, se renseigne sur l'entreprise puis croise avec votre profil.</p></div>
+      </div>
+    </div>
+
+    <section id="result" class="resultat" tabindex="-1" hidden>
+      <div class="print-only print-tete">
+        <p class="marque-txt">IA <b>FOR GOOD</b> · Décodeur d'offres</p>
+        <p id="print-date"></p>
+      </div>
+      <div class="resultat-tete">
+        <h2>Votre décodage</h2>
+        <div class="resultat-actions">
+          <button id="copy-btn" class="btn btn-sec" type="button">Copier</button>
+          <button id="print-btn" class="btn btn-sec" type="button">Enregistrer en PDF</button>
+          <button id="download-btn" class="btn btn-sec" type="button">Télécharger (.md)</button>
+          <button id="restart-btn" class="btn btn-sec" type="button">Décoder une autre offre</button>
+        </div>
+        <p id="copy-status" class="statut" aria-live="polite"></p>
+        <p id="remaining" class="statut" hidden></p>
+      </div>
+      <nav id="toc-wrap" class="encart sommaire" aria-label="Sommaire de l'analyse" hidden><strong>Sommaire</strong><ul id="toc"></ul></nav>
+      <div id="result-body" class="resultat-corps"></div>
+      <p class="avertissement">Analyse générée par IA à partir d'informations publiques et de ce que vous avez fourni. Vérifiez les faits importants (financement, salaire, avis) avant de décider : c'est le « V » de la méthode DEV.</p>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="wrap pied-in">
+      <div>
+        <p class="pied-marque">IA <b>FOR GOOD</b></p>
+        <p class="pied-txt">Décodeur d'offres conçu selon la méthode de Shirley Almosni Chiche · BUILD RH. <a data-contact href="#">Une question ?</a></p>
+      </div>
+      <ul class="pied-liens"><li><a href="index.html">Tous les agents et contenus</a></li><li><a href="https://almosnishirley.github.io/le-bon-angle/" target="_blank" rel="noopener">Le Bon Angle</a></li><li><a href="https://build-rh.io/" target="_blank" rel="noopener">BUILD RH</a></li></ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/decodeur-config.js?v=1"></script>
+  <script src="assets/vendor/pdf.min.js"></script>
+  <script src="assets/vendor/mammoth.browser.min.js"></script>
+  <script src="assets/vendor/marked.min.js"></script>
+  <script src="assets/vendor/purify.min.js"></script>
+  <script src="assets/js/decodeur.js?v=1"></script>
+</body>
+</html>

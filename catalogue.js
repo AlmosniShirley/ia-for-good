@@ -96,6 +96,21 @@ window.PLATEFORME = {
 window.CONTENUS = [
   /* ---------------- AGENTS & OUTILS IA ---------------- */
   {
+    titre: "Décodeur d'offres",
+    espace: "agents",
+    theme: "carriere",
+    type: "agent IA",
+    statut: "bêta",
+    pour: "Candidats et candidates Tech qui veulent voir derrière l'annonce",
+    description:
+      "Collez une offre d'emploi et votre CV : l'agent décrypte le vrai terrain de jeu, la culture derrière les mots, les red flags, la santé financière et la compatibilité neuroatypisme, puis calcule votre % de matching et rédige votre message d'approche. 16 points, méthode DEV.",
+    lien: "decodeur.html",
+    action: "Décoder une offre",
+    tags: ["offre d'emploi", "red flags", "matching", "CV", "neuroatypisme", "Glassdoor", "salaire"],
+    date: "2026-11-22",
+    auteur: "BUILD RH · méthode Shirley Almosni Chiche",
+  },
+  {
     titre: "Analyse de parcours Le Bon Angle",
     espace: "agents",
     theme: "carriere",

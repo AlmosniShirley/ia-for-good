@@ -1,0 +1,16 @@
+# Relais « Décodeur d'offres » (Cloudflare Worker) — voir worker/README.md
+name = "ia-for-good-decodeur"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+DUST_BASE_URL = "https://dust.tt"
+# Même espace Dust que Le Bon Angle
+DUST_WORKSPACE_ID = "LiNKoSV40F"
+# Identifiant de l'agent « analyse de poste » : À RENSEIGNER
+DUST_AGENT_ID = ""
+ALLOWED_ORIGINS = "https://almosnishirley.github.io,http://localhost:8000"
+PAYHIP_MAX_USES = "1"
+
+# Secrets — jamais dans ce fichier (à saisir dans Cloudflare) :
+#   DUST_API_KEY, ACCESS_CODE, et plus tard PAYHIP_SECRET
