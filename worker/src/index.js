@@ -13,7 +13,8 @@
 
    Secrets (Cloudflare → Worker → Settings → Variables and Secrets) :
      DUST_API_KEY    clé API Dust (obligatoire)
-     ACCESS_CODE     code personnel illimité (vous et vos testeurs)
+     ACCESS_CODE     code personnel illimité (Shirley)
+     TESTER_CODES    codes testeurs illimités, séparés par des virgules
      PAYHIP_SECRET   (plus tard, si le produit devient payant ou à 0 €)
                      « product secret key » du produit Payhip
 
@@ -104,16 +105,18 @@ export default {
         let body;
         try { body = await request.json(); } catch { return json({ error: "Requête invalide." }, 400); }
 
-        const message = typeof body.message === "string" ? body.message.trim() : "";
-        if (message.length < 200) return json({ error: "L'annonce semble vide ou trop courte." }, 400);
-        if (message.length > MAX_MESSAGE_CHARS) return json({ error: "Le texte envoyé est trop long (60 000 caractères maximum)." }, 413);
-
         const code = (body.accessCode || "").trim();
         let payhip = null;
-        const isPersonal = env.ACCESS_CODE && code === env.ACCESS_CODE;
+        // Codes illimités : ACCESS_CODE (code personnel) et TESTER_CODES (codes
+        // testeurs, séparés par des virgules — retirer un code le coupe aussitôt).
+        const unlimited = [env.ACCESS_CODE]
+          .concat(String(env.TESTER_CODES || "").split(","))
+          .map((c) => String(c || "").trim().toUpperCase())
+          .filter(Boolean);
+        const isPersonal = code !== "" && unlimited.includes(code.toUpperCase());
         if (!isPersonal) {
           if (!env.PAYHIP_SECRET) {
-            if (env.ACCESS_CODE) return json({ error: "Code d'accès incorrect." }, 401);
+            if (unlimited.length) return json({ error: "Code d'accès incorrect." }, 401);
           } else {
             payhip = await checkPayhipKey(env, code);
             if (!payhip.ok) {
@@ -126,6 +129,11 @@ export default {
             }
           }
         }
+
+        // Le contenu n'est vérifié qu'après le code (aucun appel à Dust avant)
+        const message = typeof body.message === "string" ? body.message.trim() : "";
+        if (message.length < 200) return json({ error: "L'annonce semble vide ou trop courte." }, 400);
+        if (message.length > MAX_MESSAGE_CHARS) return json({ error: "Le texte envoyé est trop long (60 000 caractères maximum)." }, 413);
 
         const res = await fetch(api, {
           method: "POST",
