@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fbf7f8">
+  <title>IA FOR GOOD</title>
+  <meta name="description" content="IA FOR GOOD : agents IA utiles, infographies marchés et études sur le neuroatypisme, l'IA et le travail. Par BUILD RH.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller aux contenus</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="marque" href="#" aria-label="IA FOR GOOD, accueil">
+        <svg class="marque-picto" viewBox="0 0 40 40" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5288f"/><stop offset="1" stop-color="#8a2c8e"/></linearGradient></defs>
+          <rect width="40" height="40" rx="11" fill="url(#g)"/>
+          <path d="M20 29s-8-4.6-8-10.4A4.6 4.6 0 0 1 20 16a4.6 4.6 0 0 1 8 2.6C28 24.4 20 29 20 29z" fill="#fff"/>
+          <path d="M29.5 8.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="#fff"/>
+        </svg>
+        <span class="marque-txt">IA <b>FOR GOOD</b></span>
+      </a>
+      <button id="confort" class="toggle" type="button" aria-pressed="false"><span aria-hidden="true">Aa</span> <i class="lbl" style="font-style:normal">Lecture confort</i></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="sur-titre">Une plateforme BUILD RH</p>
+      <h1><span id="accroche"></span> <span class="hl" id="accroche-accent"></span></h1>
+      <p id="sous-titre" class="lead"></p>
+      <div class="piliers" id="piliers"></div>
+    </div>
+  </section>
+
+  <main id="contenu" class="wrap">
+    <nav class="onglets" id="onglets" aria-label="Espaces de la plateforme"></nav>
+
+    <div class="outils">
+      <div class="search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <label for="q" class="sr-only">Rechercher</label>
+        <input id="q" type="search" placeholder="Rechercher un agent, une étude, un mot-clé…" autocomplete="off">
+      </div>
+      <div class="chips" id="themes" role="group" aria-label="Filtrer par thème"></div>
+    </div>
+
+    <p class="compte" id="compte" aria-live="polite"></p>
+    <div id="sections"></div>
+  </main>
+
+  <footer class="pied">
+    <div class="wrap pied-in">
+      <div>
+        <p class="pied-marque">IA <b>FOR GOOD</b></p>
+        <p class="pied-txt">Par Shirley Almosni Chiche · BUILD RH. Une idée d'agent, d'étude ou de partenariat ? <a id="contact" href="#">Écrivez-moi</a>.</p>
+      </div>
+      <ul class="pied-liens" id="pied-liens"></ul>
+    </div>
+  </footer>
+
+  <script src="catalogue.js?t=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
