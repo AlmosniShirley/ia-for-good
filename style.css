@@ -467,3 +467,6 @@ button.btn { cursor: pointer; font-family: inherit; }
 @media (max-width: 1379px) { .nav-principale { display: none; } .btn-nav { margin-left: auto; } }
 @media (min-width: 1380px) { .accueil .wrap.topbar-in { max-width: 1320px; } }
 .cta-ligne .btn-grand { margin: 0; }
+@media (max-width: 1519px) { .nav-principale { display: none; } .btn-nav { margin-left: auto; } }
+@media (min-width: 1520px) { .nav-principale { display: flex; } .accueil .wrap.topbar-in { max-width: 1440px; } }
+.couv img { object-position: left top; }
