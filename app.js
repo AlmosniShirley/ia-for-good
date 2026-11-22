@@ -66,6 +66,7 @@
     return '<article class="carte">' + couv +
       '<div class="corps">' + meta(r) +
         "<h3>" + esc(r.titre) + "</h3>" +
+        (r.pour ? '<p class="pour-qui">Pour : <strong>' + esc(r.pour) + "</strong></p>" : "") +
         (r.description ? '<p class="desc">' + esc(r.description) + "</p>" : "") +
         (r.auteur ? '<p class="auteur">' + esc(r.auteur) + "</p>" : "") +
         '<div class="actions">' + actions(r) + "</div>" +

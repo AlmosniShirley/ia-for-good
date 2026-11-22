@@ -87,7 +87,7 @@ window.PLATEFORME = {
       nom: "Neuroatypisme & inclusion",
       court: "Neuroatypisme",
       icone: "neuro",
-      intro: "TDAH, neuroatypies et travail : comprendre, recruter et manager sans abîmer. Des actions concrètes, pas des slogans.",
+      intro: "Pour les entreprises, les RH et les managers : comprendre le TDAH et les neuroatypies au travail, puis recruter, aménager et manager sans abîmer. Des actions concrètes, pas des slogans.",
     },
     {
       id: "autres",
@@ -169,6 +169,7 @@ window.CONTENUS = [
   {
     titre: "Neuroatypies au travail : changez le travail",
     espace: "neuro",
+    pour: "Entreprises, RH & managers",
     theme: "neuro",
     type: "carrousel",
     description:
@@ -185,6 +186,7 @@ window.CONTENUS = [
   {
     titre: "TDAH au travail",
     espace: "neuro",
+    pour: "Entreprises, RH & managers",
     theme: "neuro",
     type: "carrousel",
     description:

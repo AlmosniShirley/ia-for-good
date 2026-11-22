@@ -325,3 +325,5 @@ button.btn { cursor: pointer; font-family: inherit; }
   .par-buildrh img { height: 28px; }
   .marque-txt { font-size: 1rem; }
 }
+.pour-qui { margin: 0; display: inline-flex; align-self: flex-start; align-items: center; gap: 4px; font-size: .8rem; color: var(--c-teal); background: var(--c-teal-bg); padding: 3px 11px; border-radius: 999px; }
+.pour-qui strong { font-weight: 700; }
