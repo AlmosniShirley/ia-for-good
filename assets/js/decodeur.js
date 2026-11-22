@@ -178,6 +178,11 @@
     var message = buildMessage();
     if (message.length > MAX) return showError("L'ensemble dépasse " + MAX.toLocaleString("fr-FR") + " caractères : raccourcissez le CV ou l'annonce.", $("cv-text"));
 
+    lastRequest = {
+      annonce: lien || "Texte collé",
+      cv: !!val("cv-text"),
+      objectifs: val("objectifs").length > 140 ? val("objectifs").slice(0, 137) + "…" : val("objectifs"),
+    };
     setBusy(true);
     api("/analyze", {
       method: "POST",
@@ -222,8 +227,32 @@
     return toc;
   }
 
+  var lastRequest = {};
+  function remplirSuites() {
+    var O = C.OFFRES || {};
+    Array.prototype.forEach.call(document.querySelectorAll("[data-prix]"), function (el) {
+      var o = O[el.getAttribute("data-prix")]; if (o) el.textContent = o.prix;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-offre]"), function (el) {
+      var o = O[el.getAttribute("data-offre")]; if (o && o.lien) el.href = o.lien;
+    });
+    $("print-url").textContent = C.PAGE_OFFRES || "";
+    $("print-email").textContent = C.EMAIL || "";
+    var sujet = "Décodeur d'offres — je souhaite être recontacté·e";
+    var corps = "Bonjour Shirley,\n\nJ'ai utilisé le Décodeur d'offres sur IA FOR GOOD" +
+      (lastRequest.annonce && lastRequest.annonce.indexOf("http") === 0 ? " pour cette annonce : " + lastRequest.annonce : "") +
+      ".\nJe souhaiterais échanger avec vous pour approfondir l'analyse.\n\nCe que je retiens de mon décodage :\n\n\nMes disponibilités :\n\n";
+    $("recontact-btn").href = "mailto:" + (C.EMAIL || "") + "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
+    $("recontact-btn").closest(".recontact").hidden = !C.EMAIL;
+  }
+
   function showResult(markdown) {
     lastMarkdown = markdown;
+    $("sum-annonce").textContent = lastRequest.annonce || "Texte collé";
+    $("sum-cv").textContent = lastRequest.cv ? "Fourni" : "Non fourni (lecture partielle)";
+    $("sum-objectifs").textContent = lastRequest.objectifs || "Non précisés";
+    remplirSuites();
+    $("print-date").textContent = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
     var html = window.marked ? window.marked.parse(markdown) : "";
     var safe = html && window.DOMPurify ? window.DOMPurify.sanitize(html) : "";
     var body = $("result-body");
@@ -264,10 +293,10 @@
   function printResult() {
     var d = new Date(), prev = document.title, pad = function (n) { return (n < 10 ? "0" : "") + n; };
     $("print-date").textContent = d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-    document.title = "Decodeur offre " + pad(d.getDate()) + "-" + pad(d.getMonth() + 1) + "-" + d.getFullYear();
+    document.title = "Décodage IA FOR GOOD " + pad(d.getDate()) + "-" + pad(d.getMonth() + 1) + "-" + d.getFullYear();
     var restore = function () { document.title = prev; window.removeEventListener("afterprint", restore); };
     window.addEventListener("afterprint", restore);
-    $("copy-status").textContent = "Choisissez « Enregistrer au format PDF » comme destination.";
+    $("copy-status").textContent = "Dans la fenêtre qui s'ouvre, choisissez « Enregistrer au format PDF » comme destination.";
     setTimeout(function () { window.print(); }, 50);
   }
 

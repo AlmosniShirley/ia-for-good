@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body class="page-outil">
   <a class="skip" href="#outil">Aller au formulaire</a>
@@ -124,24 +124,77 @@
     </div>
 
     <section id="result" class="resultat" tabindex="-1" hidden>
+      <!-- En-tête visible uniquement dans le PDF -->
       <div class="print-only print-tete">
-        <p class="marque-txt">IA <b>FOR GOOD</b> · Décodeur d'offres</p>
-        <p id="print-date"></p>
+        <div class="print-marques">
+          <span class="marque-txt">IA <b>FOR GOOD</b></span>
+          <img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="150" height="47">
+        </div>
+        <p class="print-kicker">Agent IA · Scan d'annonce</p>
+        <p class="print-titre">Votre décodage d'offre</p>
+        <p class="print-date">Établi le <span id="print-date"></span></p>
       </div>
+
       <div class="resultat-tete">
-        <h2>Votre décodage</h2>
+        <p class="sur-titre">Votre décodage</p>
+        <h2>Ce qu'il y a derrière l'annonce.</h2>
+        <p class="resultat-intro">Cette analyse est une <strong>base de travail</strong>, pas un verdict : vérifiez les faits importants avant de décider. C'est le « V » de la méthode DEV.</p>
         <div class="resultat-actions">
-          <button id="copy-btn" class="btn btn-sec" type="button">Copier</button>
-          <button id="print-btn" class="btn btn-sec" type="button">Enregistrer en PDF</button>
-          <button id="download-btn" class="btn btn-sec" type="button">Télécharger (.md)</button>
-          <button id="restart-btn" class="btn btn-sec" type="button">Décoder une autre offre</button>
+          <button id="print-btn" class="btn btn-prim" type="button">Télécharger en PDF</button>
+          <button id="copy-btn" class="btn btn-sec" type="button">Copier le texte</button>
+          <button id="download-btn" class="btn btn-sec" type="button">Texte brut (.md)</button>
         </div>
         <p id="copy-status" class="statut" aria-live="polite"></p>
         <p id="remaining" class="statut" hidden></p>
       </div>
+
+      <div class="encart demande">
+        <p class="liste-titre">Votre demande</p>
+        <dl>
+          <dt>Annonce</dt><dd id="sum-annonce"></dd>
+          <dt>CV</dt><dd id="sum-cv"></dd>
+          <dt>Objectifs</dt><dd id="sum-objectifs"></dd>
+        </dl>
+      </div>
       <nav id="toc-wrap" class="encart sommaire" aria-label="Sommaire de l'analyse" hidden><strong>Sommaire</strong><ul id="toc"></ul></nav>
       <div id="result-body" class="resultat-corps"></div>
-      <p class="avertissement">Analyse générée par IA à partir d'informations publiques et de ce que vous avez fourni. Vérifiez les faits importants (financement, salaire, avis) avant de décider : c'est le « V » de la méthode DEV.</p>
+
+      <!-- Suites possibles (écran) -->
+      <div class="suites">
+        <h3 class="suites-titre">Pour aller plus loin, avec Shirley</h3>
+        <div class="suites-grille">
+          <article class="suite">
+            <span class="badge type">Vous ne savez pas quoi en faire</span>
+            <h4>Mettre l'analyse en perspective avec votre parcours.</h4>
+            <p>Se situer : une lecture humaine de votre décodage et de votre trajectoire, vos points d'appui et de vigilance, et trois actions concrètes. 1 h 15.</p>
+            <a class="btn btn-prim" data-offre="situer" href="#" target="_blank" rel="noopener">Réserver un échange · <span data-prix="situer"></span></a>
+          </article>
+          <article class="suite">
+            <span class="badge type">Vous voulez une direction</span>
+            <h4>Construire une trajectoire réaliste, étape par étape.</h4>
+            <p>Construire : cible prioritaire, compétences à développer, expériences à tester et feuille de route sur 90 jours. Trois séances.</p>
+            <a class="btn btn-sec" data-offre="construire" href="#" target="_blank" rel="noopener">Découvrir Construire · <span data-prix="construire"></span></a>
+          </article>
+        </div>
+        <div class="encart recontact">
+          <p><strong>Vous préférez que Shirley vous recontacte ?</strong> Un e-mail déjà rédigé s'ouvre : vous n'avez plus qu'à l'envoyer, en ajoutant si vous le souhaitez ce que vous retenez de votre décodage.</p>
+          <a class="btn btn-sec" id="recontact-btn" href="#">Je souhaite être recontacté·e</a>
+        </div>
+      </div>
+
+      <!-- Fin du PDF : suites possibles et mentions -->
+      <div class="print-only print-suite">
+        <p class="print-suite-titre">Pour aller plus loin, avec Shirley</p>
+        <p><strong>Vous ne savez pas quoi faire de ces résultats ?</strong> Se situer, <span data-prix="situer"></span> TTC : une séance de 1 h 15 pour mettre l'analyse en perspective et repartir avec trois actions concrètes.</p>
+        <p><strong>Vous avez besoin d'une direction et d'un plan ?</strong> Construire, <span data-prix="construire"></span> TTC : trois séances et une feuille de route sur 90 jours.</p>
+        <p><strong>Vous savez où aller ?</strong> Déployer, <span data-prix="deployer"></span> TTC : six séances pour passer à l'action.</p>
+        <p class="print-url" id="print-url"></p>
+        <p>Pour être recontacté·e par Shirley : <strong id="print-email"></strong></p>
+      </div>
+      <p class="print-only print-mention">Décodage rédigé par un agent d'IA configuré selon la méthode de Shirley Almosni Chiche (BUILD RH), à partir de l'annonce, des informations fournies et d'informations publiques. C'est une base de travail, à relire et à vérifier : il peut contenir des imprécisions et ne remplace pas un arbitrage humain. Aucune garantie de recrutement. IA FOR GOOD est une plateforme BUILD RH.</p>
+
+      <p class="avertissement"><strong>Confidentialité.</strong> Ce site n'a rien conservé : si vous fermez cette page, le décodage disparaît de votre écran. Téléchargez-le ou copiez-le.</p>
+      <p><button id="restart-btn" class="btn btn-sec" type="button">Décoder une autre offre</button></p>
     </section>
   </main>
 
@@ -156,11 +209,11 @@
     </div>
   </footer>
 
-  <script src="assets/js/decodeur-config.js?v=2"></script>
+  <script src="assets/js/decodeur-config.js?v=3"></script>
   <script src="assets/vendor/pdf.min.js"></script>
   <script src="assets/vendor/mammoth.browser.min.js"></script>
   <script src="assets/vendor/marked.min.js"></script>
   <script src="assets/vendor/purify.min.js"></script>
-  <script src="assets/js/decodeur.js?v=2"></script>
+  <script src="assets/js/decodeur.js?v=4"></script>
 </body>
 </html>

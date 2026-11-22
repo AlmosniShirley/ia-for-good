@@ -258,8 +258,14 @@ button.btn { cursor: pointer; font-family: inherit; }
 .print-only { display: none; }
 
 @media print {
-  @page { size: A4; margin: 15mm; }
-  body { background: #fff; font-size: 10.5pt; }
+  @page {
+    size: A4; margin: 15mm 15mm 18mm;
+    @bottom-left { content: "IA FOR GOOD · une plateforme BUILD RH · aiforgood.page"; font: 8pt Poppins, Arial, sans-serif; color: #6b5a64; }
+    @bottom-right { content: "Page " counter(page) " / " counter(pages); font: 8pt Poppins, Arial, sans-serif; color: #6b5a64; }
+  }
+  body { background: #fff; font-size: 10pt; line-height: 1.5; }
+  .partie p, .partie li { font-size: 10pt; }
+  .partie table { font-size: 9pt; }
   * { box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .topbar, .hero, .pied, .skip, #app, #ferme, .resultat-actions, #copy-status, #remaining, .sommaire { display: none !important; }
   .outil { max-width: none; padding: 0; }
@@ -327,3 +333,42 @@ button.btn { cursor: pointer; font-family: inherit; }
 }
 .pour-qui { margin: 0; display: inline-flex; align-self: flex-start; align-items: center; gap: 4px; font-size: .8rem; color: var(--c-teal); background: var(--c-teal-bg); padding: 3px 11px; border-radius: 999px; }
 .pour-qui strong { font-weight: 700; }
+
+/* =====================================================================
+   DÉCODEUR — résultat (v8) : demande, suites, PDF
+   ===================================================================== */
+.resultat-intro { color: var(--ink-2); margin: 0 0 14px; max-width: 62ch; }
+.resultat-tete .sur-titre { margin-bottom: 4px; }
+.liste-titre { margin: 0 0 8px; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.demande { margin-top: 18px; }
+.demande dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; margin: 0; font-size: .92em; }
+.demande dt { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); align-self: baseline; padding-top: 2px; }
+.demande dd { margin: 0; overflow-wrap: anywhere; }
+
+.suites { margin: 28px 0 18px; }
+.suites-titre { font-size: 1.3rem; font-weight: 800; margin: 0 0 14px; }
+.suites-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-bottom: 16px; }
+.suite { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.suite h4 { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.suite p { margin: 0; color: var(--ink-2); font-size: .9em; flex: 1; }
+.recontact { background: var(--c-teal-bg); border-color: #c4e6df; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.recontact p { color: var(--ink); }
+
+@media print {
+  .suites, .avertissement, #restart-btn, .resultat-tete { display: none !important; }
+  .print-tete { border-bottom: 3px solid var(--pink); padding-bottom: 6mm; margin-bottom: 6mm; }
+  .print-marques { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8mm; }
+  .print-marques img { height: 12mm; width: auto; }
+  .print-marques .marque-txt { font-size: 13pt; }
+  .print-kicker { font-size: 8.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--magenta); margin: 0 0 1.5mm !important; }
+  .print-titre { font-size: 22pt; font-weight: 800; line-height: 1.15; margin: 0 0 2mm !important; }
+  .print-date { color: var(--ink-2); font-size: 9.5pt; }
+  .demande { border: 0; background: var(--surface-2); border-radius: 3mm; padding: 4mm 5mm; margin: 0 0 6mm; break-inside: avoid; }
+  .partie h1, .partie h2 { color: var(--ink); border-bottom: 1.5px solid #f3c6dc; }
+  .partie h3 { color: var(--magenta); }
+  .print-suite { border: 1.5px solid #f3c6dc; border-radius: 3mm; padding: 5mm 6mm; margin-top: 8mm; break-inside: avoid; }
+  .print-suite p { margin: 0 0 2.5mm; font-size: 10pt; }
+  .print-suite-titre { font-weight: 800; font-size: 13pt; margin-bottom: 3mm !important; }
+  .print-url { color: var(--magenta); font-weight: 700; }
+  .print-mention { font-size: 8pt; color: var(--ink-2); margin-top: 5mm; }
+}
