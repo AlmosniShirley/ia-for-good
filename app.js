@@ -53,7 +53,8 @@
       if (r.prix) h += '<span class="prix">' + esc(r.prix) + "</span>";
       return h;
     }
-    if (r.lien) return '<a class="btn btn-prim" href="' + esc(r.lien) + '"' + (/^https?:/.test(r.lien) ? ext : "") + ">" + esc(r.action || "Accéder") + "</a>";
+    if (r.lien) return '<a class="btn btn-prim" href="' + esc(r.lien) + '"' + (/^https?:/.test(r.lien) ? ext : "") + ">" + esc(r.action || "Accéder") + "</a>" +
+      (r.exemple ? '<a class="btn btn-sec" href="' + esc(r.exemple) + '"' + ext + ">Voir un exemple</a>" : "");
     return "";
   }
 

@@ -34,6 +34,7 @@
    CHAMPS EN PLUS POUR UN AGENT IA :
    - statut       : "disponible", "bêta" ou "bientôt"
    - action       : le texte du bouton, ex. "Lancer l'analyse"
+   - exemple      : (facultatif) un PDF d'exemple, ex. "assets/exemples/mon-exemple.pdf"
    - pour         : à qui il s'adresse, ex. "Candidats Tech"
    - points       : la liste de ce que l'on obtient (affichée en puces)
 
@@ -138,6 +139,7 @@ window.CONTENUS = [
     ],
     lien: "decodeur.html",
     action: "Décoder une offre",
+    exemple: "assets/exemples/exemple-decodage-swan.pdf",
     tags: ["offre d'emploi", "red flags", "matching", "CV", "neuroatypisme", "Glassdoor", "salaire"],
     date: "2026-11-22",
     auteur: "BUILD RH · méthode Shirley Almosni Chiche",

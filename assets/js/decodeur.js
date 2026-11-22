@@ -114,7 +114,7 @@
     if (val("environnement")) infos.push("### Ce dont j'ai besoin pour bien travailler\n" + clean(val("environnement")));
     parts.push("## 3. Informations complémentaires\n" + (infos.length ? infos.join("\n") : "Aucune information complémentaire fournie."));
 
-    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et % de matching), puis respecte ta structure en 16 points, ni plus ni moins : une section de niveau 2 (##) par point, numérotée de 1 à 16, le point 16 étant « Ce qu'il faut éviter ». Si tu proposes des questions à poser en entretien, intègre-les dans le point 16 au lieu d'ajouter une section.");
+    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et % de matching), puis respecte ta structure en 16 points, ni plus ni moins : une section de niveau 2 (##) par point, numérotée de 1 à 16, le point 16 étant « Ce qu'il faut éviter ». Si tu proposes des questions à poser en entretien, intègre-les dans le point 16 au lieu d'ajouter une section. Au point 6 (Red Flags), présente les red flags sous forme d'un tableau Markdown avec exactement ces en-têtes de colonnes : Red flag | Pattern | Gravité | Indices relevés | Conséquences possibles (la colonne Gravité contient seulement « faible », « moyenne » ou « forte ») ; une ligne par red flag, puis quelques lignes de commentaire si nécessaire (cumuls, signaux non vérifiables).");
     return parts.join("\n\n");
   }
 
@@ -262,6 +262,14 @@
     else { var pre = document.createElement("pre"); pre.textContent = markdown; body.innerHTML = ""; body.appendChild(pre); }
     Array.prototype.forEach.call(body.querySelectorAll("a"), function (a) { a.target = "_blank"; a.rel = "noopener noreferrer"; });
 
+    // Gravité des red flags : pastille de couleur
+    Array.prototype.forEach.call(body.querySelectorAll("td"), function (td) {
+      var t = td.textContent.trim().toLowerCase();
+      if (/^(faible|moyenne|forte)( à (faible|moyenne|forte))?$/.test(t)) {
+        td.classList.add("gravite");
+        td.innerHTML = '<span class="grav grav-' + t.split(" ").pop() + '">' + td.innerHTML + "</span>";
+      }
+    });
     var toc = splitIntoParts(body), list = $("toc");
     list.innerHTML = "";
     toc.forEach(function (t) {

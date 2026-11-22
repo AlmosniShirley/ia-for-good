@@ -372,3 +372,17 @@ button.btn { cursor: pointer; font-family: inherit; }
   .print-url { color: var(--magenta); font-weight: 700; }
   .print-mention { font-size: 8pt; color: var(--ink-2); margin-top: 5mm; }
 }
+.exemple-lien { margin: 16px 0 0; }
+.exemple-lien a { display: inline-block; background: var(--surface); border: 1.5px solid var(--pink); color: var(--magenta); text-decoration: none; padding: 9px 16px; border-radius: 12px; font-size: .9em; }
+.exemple-lien a:hover { background: #fdeef6; }
+/* Gravité des red flags */
+.partie td.gravite { white-space: nowrap; }
+.grav { display: inline-block; font-weight: 700; font-size: .85em; padding: 2px 9px; border-radius: 999px; }
+.grav-forte { background: #fde3e3; color: #9b1c1c; }
+.grav-moyenne { background: #fff0d9; color: #8a4b00; }
+.grav-faible { background: #fff8cc; color: #6b5a00; }
+.partie td, .partie th { hyphens: none; word-break: normal; overflow-wrap: normal; }
+@media print {
+  .partie table { font-size: 8.5pt !important; }
+  .partie th, .partie td { padding: 1.5mm 2mm; }
+}
