@@ -247,6 +247,8 @@
   }
 
   function showResult(markdown) {
+    // Retire les marqueurs de citation internes de Dust (ex. « :cite[bpe] »)
+    markdown = String(markdown || "").replace(/[ \t]*:cite\[[^\]]*\]/g, "");
     lastMarkdown = markdown;
     $("sum-annonce").textContent = lastRequest.annonce || "Texte collé";
     $("sum-cv").textContent = lastRequest.cv ? "Fourni" : "Non fourni (lecture partielle)";
