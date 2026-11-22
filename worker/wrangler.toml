@@ -9,7 +9,7 @@ DUST_BASE_URL = "https://dust.tt"
 DUST_WORKSPACE_ID = "LiNKoSV40F"
 # Identifiant de l'agent « analyse de poste »
 DUST_AGENT_ID = "V0aYuVjSL3"
-ALLOWED_ORIGINS = "https://almosnishirley.github.io,http://localhost:8000"
+ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
 PAYHIP_MAX_USES = "1"
 
 # Secrets — jamais dans ce fichier (à saisir dans Cloudflare) :
