@@ -2,13 +2,14 @@
    CATALOGUE IA FOR GOOD — c'est le seul fichier à modifier !
    =====================================================================
 
-   Rubriques (champ "espace") — voir la liste "espaces" plus bas :
-   - "analyse-parcours" : Agent IA · Analyse de parcours (Le Bon Angle)
-   - "scan-annonce"     : Agent IA · Scan d'annonce (Décodeur d'offres)
-   - "documentation-ia" : livres blancs (type "livre blanc") et
-                          infographies (type "infographie") sur l'IA
-   - "neuro"            : neuroatypisme & inclusion
-   - "autres"           : tout le reste
+   ⚠️ Les deux outils (Le Bon Angle, Décodeur d'offres) sont décrits
+      directement dans index.html. Ce catalogue alimente les RESSOURCES.
+
+   Rubriques (champ "espace") :
+   - "documentation-ia" : Comprendre l'IA au travail — livres blancs
+                          (type "livre blanc") et infographies (type "infographie")
+   - "neuro"            : Neuroatypies & inclusion
+   - "autres"           : tout le reste (la section n'apparaît que si elle a du contenu)
 
    POUR AJOUTER UN CONTENU : copiez un bloc { ... } de la liste CONTENUS
    (de l'accolade ouvrante à la virgule qui suit l'accolade fermante),
@@ -31,12 +32,6 @@
                     extrait: "https://…" (facultatif)
    - à venir      : statut: "bientôt"                (bouton désactivé)
 
-   CHAMPS EN PLUS POUR UN AGENT IA :
-   - statut       : "disponible", "bêta" ou "bientôt"
-   - action       : le texte du bouton, ex. "Lancer l'analyse"
-   - exemple      : (facultatif) un PDF d'exemple, ex. "assets/exemples/mon-exemple.pdf"
-   - pour         : à qui il s'adresse, ex. "Candidats Tech"
-   - points       : la liste de ce que l'on obtient (affichée en puces)
 
    ⚠️ Tout ce qui est dans ce dépôt est public : ne déposez jamais la
       version complète d'un document payant. Elle va uniquement sur Payhip.
@@ -51,33 +46,15 @@ window.PLATEFORME = {
   contact: "mailto:shirley.chiche@buildrh.co",
 
   // LES RUBRIQUES (dans l'ordre d'affichage)
-  // - vedette: true      → grande carte (pour un produit phare, ex. un agent)
   // - sousRubriques      → regroupe les contenus par "type" (livre blanc, infographie…)
-  // - masquerSiVide: true → la rubrique n'apparaît que lorsqu'elle a du contenu
-  // icone possible : "parcours", "scan", "doc", "neuro", "autres"
+  // - masquerSiVide: true → la section n'apparaît que lorsqu'elle a du contenu
   espaces: [
     {
-      id: "analyse-parcours",
-      nom: "Agent IA · Analyse de parcours",
-      court: "Analyse de parcours",
-      icone: "parcours",
-      vedette: true,
-      intro: "Votre CV face au poste que vous visez : intitulés, lisibilité ATS, clarté, et des pistes concrètes pour repositionner votre trajectoire.",
-    },
-    {
-      id: "scan-annonce",
-      nom: "Agent IA · Scan d'annonce",
-      court: "Scan d'annonce",
-      icone: "scan",
-      vedette: true,
-      intro: "Une annonce, c'est une vitrine. L'agent lit ce qu'il y a derrière avant que vous ne postuliez.",
-    },
-    {
       id: "documentation-ia",
-      nom: "Documentation IA",
-      court: "Documentation IA",
+      nom: "Comprendre l'IA au travail",
+      court: "IA au travail",
       icone: "doc",
-      intro: "Livres blancs et infographies pour comprendre comment l'IA transforme les métiers, les organisations et le marché de l'emploi.",
+      intro: "Des ressources courtes, sourcées et actionnables pour comprendre les nouveaux rôles, les systèmes augmentés, les transformations du travail et les mécanismes de confiance.",
       sousRubriques: [
         { type: "livre blanc", nom: "Livres blancs" },
         { type: "infographie", nom: "Infographies" },
@@ -85,10 +62,10 @@ window.PLATEFORME = {
     },
     {
       id: "neuro",
-      nom: "Neuroatypisme & inclusion",
+      nom: "Neuroatypies & inclusion",
       court: "Neuroatypisme",
       icone: "neuro",
-      intro: "Pour les entreprises, les RH et les managers : comprendre le TDAH et les neuroatypies au travail, puis recruter, aménager et manager sans abîmer. Des actions concrètes, pas des slogans.",
+      intro: "Des repères concrets pour les RH, les managers et les entreprises qui veulent recruter, onboarder et manager sans demander aux personnes de masquer leur fonctionnement.",
     },
     {
       id: "autres",
@@ -120,52 +97,6 @@ window.PLATEFORME = {
 };
 
 window.CONTENUS = [
-  /* ---------------- AGENTS & OUTILS IA ---------------- */
-  {
-    titre: "Décodeur d'offres",
-    espace: "scan-annonce",
-    theme: "carriere",
-    type: "agent IA",
-    statut: "bêta",
-    pour: "Candidats Tech qui veulent voir derrière l'annonce",
-    description:
-      "Collez une offre d'emploi et votre CV : l'agent décrypte le vrai terrain de jeu, la culture derrière les mots, les red flags, la santé financière et la compatibilité neuroatypisme, puis calcule votre % de matching et rédige votre message d'approche. 16 points, méthode DEV.",
-    points: [
-      "Le vrai terrain de jeu : startup, scale-up, grand groupe, ESN, éditeur…",
-      "Les red flags (10 patterns) et les green flags, avec leur gravité",
-      "Culture, santé financière, avis Glassdoor, diversité",
-      "Compatibilité avec un fonctionnement neuroatypique",
-      "% de matching, CV à retravailler, message d'approche et questions d'entretien",
-    ],
-    lien: "decodeur.html",
-    action: "Décoder une offre",
-    exemple: "assets/exemples/exemple-decodage-swan.pdf",
-    tags: ["offre d'emploi", "red flags", "matching", "CV", "neuroatypisme", "Glassdoor", "salaire"],
-    date: "2026-11-22",
-    auteur: "BUILD RH · méthode Shirley Almosni Chiche",
-  },
-  {
-    titre: "Analyse de parcours Le Bon Angle",
-    espace: "analyse-parcours",
-    theme: "carriere",
-    type: "agent IA",
-    statut: "disponible",
-    pour: "Profils Tech en recherche ou en transition",
-    description:
-      "Collez votre CV et l'offre visée : l'agent vérifie la correspondance des intitulés, note la lisibilité ATS et la clarté sur 5, et vous rend des pistes concrètes. Gratuit pendant le lancement.",
-    points: [
-      "Correspondance entre vos intitulés et le rôle visé",
-      "Notes de lisibilité ATS et de clarté, sur 5",
-      "Reformulations concrètes pour votre CV et votre LinkedIn",
-      "Priorités d'amélioration, dans l'ordre",
-    ],
-    lien: "https://almosnishirley.github.io/le-bon-angle/atelier.html",
-    action: "Lancer l'analyse gratuite",
-    tags: ["CV", "ATS", "carrière", "Tech", "gratuit"],
-    date: "2026-11-21",
-    auteur: "BUILD RH · Le Bon Angle",
-  },
-
   /* ---------------- DOCUMENTATION IA & NEUROATYPISME ----------------
      Infographie : espace "documentation-ia", type "infographie". */
   {

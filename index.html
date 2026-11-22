@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#fbf7f8">
-  <title>IA FOR GOOD</title>
-  <meta name="description" content="IA FOR GOOD : agents IA utiles, infographies marchés et études sur le neuroatypisme, l'IA et le travail. Par BUILD RH.">
+  <title>IA FOR GOOD · Ne postulez plus à l'aveugle</title>
+  <meta name="description" content="Comprenez ce qu'une offre dit vraiment, vérifiez si votre parcours est lisible pour elle, décidez où investir votre temps. Des outils IA pour les profils Tech, par BUILD RH.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
-<body>
-  <a class="skip" href="#contenu">Aller aux contenus</a>
+<body class="accueil">
+  <a class="skip" href="#outils">Aller aux outils</a>
 
   <header class="topbar">
     <div class="wrap topbar-in">
@@ -30,46 +30,265 @@
       <a class="par-buildrh" href="https://build-rh.io/" target="_blank" rel="noopener" aria-label="Une plateforme BUILD RH">
         <span>par</span><img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="120" height="37">
       </a>
-      <button id="confort" class="toggle" type="button" aria-pressed="false"><span aria-hidden="true">Aa</span> <i class="lbl" style="font-style:normal">Lecture confort</i></button>
+      <nav class="nav-principale" aria-label="Navigation principale">
+        <a href="#parcours">Analyser mon parcours</a>
+        <a href="#offre">Décoder une offre</a>
+        <a href="#ressources-ia">Comprendre l'IA au travail</a>
+        <a href="#ressources-neuro">Neuroatypies &amp; inclusion</a>
+      </nav>
+      <a class="btn btn-prim btn-nav" href="#outils">Commencer une analyse</a>
+      <button id="confort" class="toggle toggle-mini" type="button" aria-pressed="false" title="Lecture confort"><span aria-hidden="true">Aa</span><i class="sr-only">Lecture confort</i></button>
     </div>
   </header>
 
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero hero-accueil">
     <div class="wrap">
-      <p class="sur-titre">Une plateforme BUILD RH</p>
-      <h1><span id="accroche"></span> <span class="hl" id="accroche-accent"></span></h1>
-      <p id="sous-titre" class="lead"></p>
-      <div class="piliers" id="piliers"></div>
+      <p class="sur-titre">Pour les profils Tech en recherche, en transition ou en questionnement</p>
+      <h1>Ne postulez plus <span class="hl">à l'aveugle.</span></h1>
+      <p class="lead lead-fort">Comprenez ce qu'une offre dit vraiment. Vérifiez si votre parcours est lisible pour elle. Décidez où investir votre temps.</p>
+      <p class="lead">Des outils IA conçus pour les profils Tech en recherche, en transition ou en questionnement professionnel, avec une méthode explicite, des résultats actionnables et des limites clairement posées.</p>
+      <div class="cta-ligne">
+        <a class="btn btn-prim btn-grand" href="decodeur.html">Décoder une offre</a>
+        <a class="btn btn-sec btn-grand" href="https://almosnishirley.github.io/le-bon-angle/atelier.html">Analyser mon parcours</a>
+      </div>
+      <p class="microcopy">Une première analyse pour y voir plus clair. Aucun verdict automatique sur votre avenir professionnel.</p>
     </div>
   </section>
 
-  <main id="contenu" class="wrap">
-    <nav class="onglets" id="onglets" aria-label="Espaces de la plateforme"></nav>
-
-    <div class="outils">
-      <div class="search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <label for="q" class="sr-only">Rechercher</label>
-        <input id="q" type="search" placeholder="Rechercher : CV, red flags, TDAH, livre blanc…" autocomplete="off">
+  <main>
+    <!-- BÉNÉFICES -->
+    <section class="bloc-page benefices" aria-label="Ce que vous y gagnez">
+      <div class="wrap grille-3">
+        <article class="benefice">
+          <span class="ico-rond" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span>
+          <h2>Gagner du temps</h2>
+          <p>Identifiez rapidement les offres qui méritent réellement votre attention.</p>
+        </article>
+        <article class="benefice">
+          <span class="ico-rond" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
+          <h2>Mieux vous positionner</h2>
+          <p>Repérez ce qui est clair, flou ou sous-valorisé dans votre parcours.</p>
+        </article>
+        <article class="benefice">
+          <span class="ico-rond" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.5M12 14h.01"/></svg></span>
+          <h2>Poser les bonnes questions</h2>
+          <p>Arrivez en entretien avec des points de vérification concrets, pas avec des suppositions.</p>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <p class="compte" id="compte" aria-live="polite"></p>
-    <div id="sections"></div>
+    <!-- PROBLÈME -->
+    <section class="bloc-page probleme">
+      <div class="wrap etroit">
+        <h2 class="titre-section">Une bonne candidature commence avant le bouton « Postuler ».</h2>
+        <p>Une annonce peut sembler attractive et cacher un rôle mal défini, une disponibilité permanente ou un écart important entre le discours et la réalité.</p>
+        <p>À l'inverse, votre parcours peut être pertinent sans être lisible : intitulés atypiques, expérience mal racontée, compétences importantes noyées dans le CV ou positionnement trop général.</p>
+        <p class="accent-p"><strong>IA FOR GOOD vous aide à regarder les deux côtés de la rencontre : l'offre et votre parcours.</strong></p>
+      </div>
+    </section>
+
+    <!-- OUTILS -->
+    <section class="bloc-page outils-section" id="outils" aria-labelledby="h-outils">
+      <div class="wrap">
+        <h2 class="titre-section" id="h-outils">Deux outils pour décider avec plus de lucidité</h2>
+        <p class="intro-section">Comprendre l'offre, puis vérifier votre positionnement, ou l'inverse : les deux se complètent.</p>
+
+        <article class="outil-carte" id="parcours">
+          <div class="outil-panneau">
+            <span class="outil-num">1</span>
+            <p class="outil-kicker">Le Bon Angle</p>
+            <p class="outil-sous">Votre parcours face au poste</p>
+            <span class="badge ok">disponible · gratuit</span>
+          </div>
+          <div class="outil-corps">
+            <h3>Votre expérience est-elle lisible pour le poste que vous visez ?</h3>
+            <p>Déposez votre CV et indiquez le rôle que vous visez. L'outil examine les écarts de vocabulaire, la clarté de votre positionnement et la manière dont votre expérience peut être comprise par un recruteur ou un outil de tri.</p>
+            <p class="liste-titre">Vous obtenez</p>
+            <ul class="obtenez">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les correspondances entre vos intitulés et le rôle visé ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les éléments de votre parcours qui risquent d'être mal compris ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>une indication de lisibilité pour les outils de tri (ATS) ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>des pistes concrètes pour votre CV et votre profil LinkedIn ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les priorités à traiter avant de postuler.</span></li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-prim" href="https://almosnishirley.github.io/le-bon-angle/atelier.html">Obtenir mon premier diagnostic</a>
+              <a class="btn btn-sec" href="https://almosnishirley.github.io/le-bon-angle/assets/exemples/exemple-analyse-le-bon-angle.pdf" target="_blank" rel="noopener">Voir un exemple</a>
+            </div>
+            <p class="microcopy">L'outil ne prédit pas une décision de recrutement. Il vous aide à rendre votre expérience plus lisible et à identifier les points à vérifier.</p>
+          </div>
+        </article>
+
+        <article class="outil-carte" id="offre">
+          <div class="outil-panneau">
+            <span class="outil-num">2</span>
+            <p class="outil-kicker">Décodeur d'offres</p>
+            <p class="outil-sous">Ce que l'annonce ne dit pas explicitement</p>
+            <span class="badge beta">bêta</span>
+          </div>
+          <div class="outil-corps">
+            <h3>Une annonce est une vitrine. Regardons ce qu'il y a derrière.</h3>
+            <p>Collez une offre et votre CV pour examiner le contexte, les attentes implicites et les zones qui méritent d'être vérifiées avant de candidater.</p>
+            <p class="liste-titre">L'analyse porte notamment sur</p>
+            <ul class="obtenez deux-col">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>le type d'environnement : startup, scale-up, grand groupe, ESN, éditeur ou autre ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les responsabilités réellement suggérées par l'annonce ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les incohérences ou zones floues du rôle ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les signaux favorables et les points de vigilance ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>le niveau d'autonomie, de pression et de disponibilité attendu ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les conditions de travail explicites et celles qu'il faut clarifier ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>l'adéquation entre votre parcours et le poste ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les questions à poser en entretien ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>les priorités éventuelles pour retravailler votre candidature ;</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>un message d'approche adapté à la situation.</span></li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-prim" href="decodeur.html">Décoder cette offre</a>
+              <a class="btn btn-sec" href="assets/exemples/exemple-decodage-swan.pdf" target="_blank" rel="noopener">Voir un exemple</a>
+            </div>
+            <p class="microcopy">Les informations sur l'entreprise reposent sur les signaux publics disponibles au moment de l'analyse. Elles ne constituent ni un audit financier ni une vérité définitive sur la culture interne.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMMENT ÇA FONCTIONNE -->
+    <section class="bloc-page fonctionnement" aria-labelledby="h-fonct">
+      <div class="wrap">
+        <h2 class="titre-section" id="h-fonct">Comment ça fonctionne</h2>
+        <ol class="etapes grille-3">
+          <li><span class="etape-num">1</span><h3>Vous fournissez le contexte</h3><p>Votre CV, une offre ou les deux. Plus le contexte est précis, plus l'analyse peut être utile.</p></li>
+          <li><span class="etape-num">2</span><h3>L'outil applique une grille de lecture</h3><p>Il examine les éléments visibles, les écarts, les incohérences et les informations manquantes selon une méthode conçue pour les métiers Tech.</p></li>
+          <li><span class="etape-num">3</span><h3>Vous repartez avec des actions</h3><p>Pas seulement un texte généré : des priorités, des reformulations, des questions à poser et une prochaine étape claire.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- IA UTILE -->
+    <section class="bloc-page ia-utile">
+      <div class="wrap deux-colonnes">
+        <div>
+          <h2 class="titre-section">Une IA utile, pas une IA qui décide à votre place</h2>
+          <p>IA FOR GOOD ne vous promet pas de prédire le recruteur, de garantir un entretien ou de détecter la « bonne » entreprise à votre place.</p>
+          <p class="accent-p"><strong>Le jugement final reste le vôtre.</strong></p>
+        </div>
+        <div class="encart">
+          <p class="liste-titre">L'outil vous aide à</p>
+          <ul class="obtenez">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>mieux comprendre une situation ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>repérer les hypothèses à vérifier ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>améliorer votre manière de présenter votre expérience ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>prendre une décision plus informée.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEUROATYPIE -->
+    <section class="bloc-page neuro-bloc">
+      <div class="wrap etroit">
+        <h2 class="titre-section">Et la neuroatypie dans tout ça ?</h2>
+        <p>Une offre ne dit pas toujours clairement comment le travail se vit au quotidien : réunions, interruptions, urgence, autonomie, ambiguïté, management ou disponibilité attendue.</p>
+        <p>L'analyse peut faire ressortir les conditions de travail à clarifier pour différents modes de fonctionnement et vous aider à préparer les bonnes questions. Elle ne pose pas de diagnostic et ne rend pas de verdict sur votre « compatibilité » avec une entreprise.</p>
+        <p class="accent-p"><strong>L'objectif n'est pas de demander aux personnes de mieux se masquer. L'objectif est de mieux comprendre le cadre de travail avant de s'y engager.</strong></p>
+        <a class="lien-fleche" href="#ressources-neuro">Voir les ressources sur les neuroatypies au travail</a>
+      </div>
+    </section>
+
+    <!-- CONFIANCE -->
+    <section class="bloc-page confiance">
+      <div class="wrap deux-colonnes">
+        <div>
+          <h2 class="titre-section">Pourquoi faire confiance à cette méthode ?</h2>
+          <p>IA FOR GOOD est une initiative de <a href="https://build-rh.io/" target="_blank" rel="noopener">BUILD RH</a>, fondée sur une expérience concrète du recrutement IT, des trajectoires professionnelles et des réalités du travail.</p>
+          <p class="accent-p"><strong>Pas de promesse magique. Pas de verdict automatique. Un meilleur angle pour décider.</strong></p>
+        </div>
+        <div class="encart">
+          <p class="liste-titre">La méthode privilégie</p>
+          <ul class="obtenez">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>des critères explicites ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>des recommandations concrètes ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>la distinction entre faits, signaux et hypothèses ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>la transparence sur les limites de l'IA ;</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>une lecture inclusive des parcours atypiques.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESSOURCES (remplies depuis catalogue.js) -->
+    <section class="bloc-page ressources" id="ressources-ia" aria-labelledby="h-res-ia">
+      <div class="wrap">
+        <h2 class="titre-section" id="h-res-ia">Comprendre l'IA au travail</h2>
+        <p class="intro-section" id="intro-ia"></p>
+        <div id="grille-ia"></div>
+      </div>
+    </section>
+    <section class="bloc-page ressources" id="ressources-neuro" aria-labelledby="h-res-neuro">
+      <div class="wrap">
+        <h2 class="titre-section" id="h-res-neuro">Neuroatypies &amp; inclusion</h2>
+        <p class="intro-section" id="intro-neuro"></p>
+        <div id="grille-neuro"></div>
+      </div>
+    </section>
+    <section class="bloc-page ressources" id="ressources-autres" aria-labelledby="h-res-autres" hidden>
+      <div class="wrap">
+        <h2 class="titre-section" id="h-res-autres">Autres sujets</h2>
+        <p class="intro-section" id="intro-autres"></p>
+        <div id="grille-autres"></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bloc-page faq" id="faq" aria-labelledby="h-faq">
+      <div class="wrap etroit">
+        <h2 class="titre-section" id="h-faq">Questions fréquentes</h2>
+        <details>
+          <summary>Est-ce que cet outil remplace ChatGPT ?</summary>
+          <p>Non. ChatGPT est un outil généraliste. IA FOR GOOD applique une grille de lecture spécialisée pour les profils Tech et transforme l'analyse en priorités, questions et livrables concrets. Une personne expérimentée peut reconstruire une partie de cette démarche avec ChatGPT ; ici, la méthode est déjà structurée.</p>
+        </details>
+        <details>
+          <summary>Est-ce que le score prédit mes chances d'être recruté·e ?</summary>
+          <p>Non. Il s'agit d'une estimation méthodologique de l'adéquation et de la lisibilité des informations fournies. La décision dépend aussi du marché, du recruteur, du manager, des autres candidats et d'éléments qui ne figurent pas dans l'annonce.</p>
+        </details>
+        <details>
+          <summary>L'analyse ATS est-elle une certification ?</summary>
+          <p>Non. Les outils ATS ne fonctionnent pas tous de la même manière. L'analyse donne des indications sur la lisibilité probable de votre CV pour des outils de tri et sur la clarté de son contenu.</p>
+        </details>
+        <details>
+          <summary>L'outil peut-il savoir si une entreprise me correspond ?</summary>
+          <p>Non. Il peut relever des signaux dans l'offre et formuler des hypothèses à vérifier. Il ne connaît pas toute la réalité de l'équipe, du management ou du quotidien de travail.</p>
+        </details>
+        <details>
+          <summary>Que deviennent mes données ?</summary>
+          <p>Ce site ne conserve rien : ni compte, ni cookie de suivi, ni base de données. Votre CV est lu dans votre navigateur, et vous pouvez masquer automatiquement votre e-mail et votre téléphone avant l'envoi. Le texte est transmis à l'agent IA hébergé chez Dust, le fournisseur utilisé par BUILD RH, pour produire l'analyse ; la conversation reste dans l'espace Dust de BUILD RH, non public, et vous pouvez demander sa suppression à tout moment en <a href="mailto:shirley.chiche@buildrh.co?subject=Suppression%20de%20mes%20donn%C3%A9es">écrivant à BUILD RH</a>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="bloc-page cta-final">
+      <div class="wrap etroit">
+        <h2>Avant de postuler, prenez le temps de comprendre.</h2>
+        <p>Analysez votre positionnement. Décodez l'offre. Préparez vos questions. Décidez ensuite.</p>
+        <a class="btn btn-blanc btn-grand" href="#outils">Commencer une analyse</a>
+      </div>
+    </section>
   </main>
 
   <footer class="pied">
     <div class="wrap pied-in">
       <div>
         <a class="pied-logo" href="https://build-rh.io/" target="_blank" rel="noopener"><img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="150" height="47"></a>
-        <p class="pied-marque">IA <b>FOR GOOD</b></p>
-        <p class="pied-txt">Par Shirley Almosni Chiche · BUILD RH. Une idée d'agent, d'étude ou de partenariat ? <a id="contact" href="#">Écrivez-moi</a>.</p>
+        <p class="pied-marque">IA <b>FOR GOOD</b> · par BUILD RH</p>
+        <p class="pied-txt">Des outils IA pour mieux comprendre le travail, sans abandonner son jugement. Une idée, une question ? <a id="contact" href="#">Écrivez-moi</a>.</p>
       </div>
       <ul class="pied-liens" id="pied-liens"></ul>
     </div>
   </footer>
 
-  <script src="catalogue.js?t=1"></script>
-  <script src="app.js?v=5"></script>
+  <script src="catalogue.js?t=2"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

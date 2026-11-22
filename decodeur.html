@@ -6,12 +6,12 @@
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#fbf7f8">
   <title>Décodeur d'offres · IA FOR GOOD</title>
-  <meta name="description" content="Décodez une offre d'emploi tech au-delà de sa façade : culture, red flags, santé financière, compatibilité neuroatypisme, % de matching avec votre CV et message d'approche.">
+  <meta name="description" content="Une annonce est une vitrine. Décodez ce qu'une offre d'emploi tech ne dit pas explicitement : environnement, zones floues, points de vigilance, conditions de travail à clarifier, adéquation avec votre parcours et questions à poser.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body class="page-outil">
   <a class="skip" href="#outil">Aller au formulaire</a>
@@ -36,13 +36,12 @@
 
   <section class="hero hero-outil">
     <div class="wrap">
-      <p class="sur-titre"><a href="index.html#scan-annonce">Agent IA · Scan d'annonce</a> · bêta</p>
+      <p class="sur-titre"><a href="index.html#offre">Décoder une offre</a> · bêta</p>
       <h1>Décodeur <span class="hl">d'offres.</span></h1>
-      <p class="lead">Une annonce, c'est une vitrine. Le Décodeur lit ce qu'il y a derrière : le vrai terrain de jeu, la culture qui transparaît dans les mots, les red flags, la santé financière, la compatibilité avec un fonctionnement neuroatypique… puis il croise tout cela avec votre CV.</p>
+      <p class="lead">Une annonce est une vitrine. Regardons ce qu'il y a derrière : le type d'environnement, les responsabilités réellement suggérées, les zones floues, les signaux favorables et les points de vigilance, les conditions de travail à clarifier, puis l'adéquation avec votre parcours.</p>
       <ul class="points-cles">
-        <li><strong>16 points d'analyse</strong> selon la méthode Build RH</li>
-        <li><strong>Méthode DEV</strong> : Douter, Évaluer, Vérifier</li>
-        <li><strong>% de matching</strong>, CV à retravailler et message d'approche prêt à envoyer</li>
+        <li><strong>Grille DEV en 16 points</strong> : Douter de la vitrine, Évaluer les signaux, Vérifier avant de décider</li>
+        <li><strong>Niveau d'adéquation estimé</strong>, avec critères explicites, questions d'entretien et message d'approche</li>
       </ul>
       <p class="exemple-lien"><a href="assets/exemples/exemple-decodage-swan.pdf" target="_blank" rel="noopener"><strong>Voir un exemple réel</strong> : le décodage d'une offre de Talent Acquisition Team Manager chez Swan (PDF, CV anonymisé) ↗</a></p>
     </div>
@@ -60,8 +59,8 @@
         <summary>Ce que contient l'analyse (16 points)</summary>
         <ol class="seize">
           <li>Ce que fait le produit (+ vidéos)</li><li>Vision et terrain de jeu</li><li>Culture à travers le wording</li><li>Culture de l'IA</li>
-          <li>Situation financière</li><li>Red flags (10 patterns)</li><li>Green flags</li><li>Avis Glassdoor récurrents</li>
-          <li>Diversité : neurodiversité, handicap, égalité</li><li>Compatibilité neuroatypisme</li><li>Vrais atouts vs inconvénients</li><li>% de matching avec votre profil</li>
+          <li>Signaux publics sur la solidité de l'entreprise</li><li>Red flags (10 patterns)</li><li>Green flags</li><li>Avis Glassdoor récurrents</li>
+          <li>Diversité : neurodiversité, handicap, égalité</li><li>Conditions de travail à clarifier pour différents modes de fonctionnement</li><li>Vrais atouts vs inconvénients</li><li>Niveau d'adéquation estimé avec votre parcours</li>
           <li>Salaire : dans le marché ou non</li><li>Améliorer votre CV</li><li>Message d'approche optimisé</li><li>Ce qu'il faut éviter</li>
         </ol>
       </details>
@@ -77,7 +76,7 @@
 
         <fieldset class="bloc">
           <legend><span class="num">2</span> Votre CV <em>fortement conseillé</em></legend>
-          <p class="aide-bloc">Sans CV, vous aurez une lecture de l'entreprise et du poste, mais pas de % de matching fiable ni de conseils CV personnalisés.</p>
+          <p class="aide-bloc">Sans CV, vous aurez une lecture de l'entreprise et du poste, mais pas de niveau d'adéquation fiable ni de conseils CV personnalisés.</p>
           <div id="dropzone" class="dropzone">
             <input id="cv-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
             <label for="cv-file"><strong>Déposez votre CV</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
@@ -98,7 +97,7 @@
           <textarea id="objectifs" rows="3" placeholder="Ex. : rester en IC senior / passer manager, aller vers le produit, quitter les ESN…"></textarea>
           <label for="non-nego">Vos valeurs et points non négociables</label>
           <textarea id="non-nego" rows="3" placeholder="Ex. : télétravail 3 jours, pas de culture de l'urgence, salaire minimum, impact…"></textarea>
-          <label for="environnement">Ce dont vous avez besoin pour bien travailler <span class="aide">facultatif — aide l'analyse de compatibilité neuroatypisme, sans aucun diagnostic</span></label>
+          <label for="environnement">Ce dont vous avez besoin pour bien travailler <span class="aide">facultatif — aide à repérer les conditions de travail à clarifier, sans aucun diagnostic</span></label>
           <textarea id="environnement" rows="2" placeholder="Ex. : consignes écrites, peu d'open space, temps de concentration protégé…"></textarea>
         </fieldset>
 
@@ -110,17 +109,17 @@
             <p class="aide-bloc" id="code-aide">Le Décodeur est en bêta. Pas encore de code ? <a data-contact href="#">Demandez-le</a>.</p>
           </div>
           <label class="case"><input id="redact" type="checkbox" checked> Masquer automatiquement mon e-mail et mon téléphone avant l'envoi</label>
-          <label class="case"><input id="consent" type="checkbox"> J'accepte que ces textes soient transmis à l'agent IA (Dust) le temps de l'analyse. Rien n'est conservé sur ce site.</label>
+          <label class="case"><input id="consent" type="checkbox"> J'accepte que ces textes soient transmis à l'outil d'analyse IA (hébergé chez Dust) pour produire l'analyse. Rien n'est conservé sur ce site.</label>
           <p id="form-error" class="erreur" role="alert" hidden></p>
-          <div id="service-full" class="erreur" tabindex="-1" hidden>Le Décodeur est très demandé en ce moment et l'agent n'a pas pu être contacté. Votre code n'a pas été utilisé : réessayez un peu plus tard.</div>
+          <div id="service-full" class="erreur" tabindex="-1" hidden>Le Décodeur est très demandé en ce moment et l'outil n'a pas pu être joint. Votre code n'a pas été utilisé : réessayez un peu plus tard.</div>
           <button id="submit-btn" class="btn btn-prim btn-grand" type="submit">Décoder l'offre</button>
-          <p class="aide-bloc">L'analyse prend en général 2 à 6 minutes : l'agent fait des recherches sur l'entreprise. Gardez la page ouverte.</p>
+          <p class="aide-bloc">L'analyse prend en général 2 à 6 minutes : l'outil recherche les signaux publics sur l'entreprise. Gardez la page ouverte.</p>
         </fieldset>
       </form>
 
       <div id="progress" class="encart progress" tabindex="-1" hidden>
         <span class="spinner" aria-hidden="true"></span>
-        <div><strong id="progress-text">Analyse en cours…</strong><p>L'agent lit l'annonce, se renseigne sur l'entreprise puis croise avec votre profil.</p></div>
+        <div><strong id="progress-text">Analyse en cours…</strong><p>L'outil analyse l'annonce, recherche les signaux publics sur l'entreprise puis les croise avec votre parcours.</p></div>
       </div>
     </div>
 
@@ -139,7 +138,7 @@
       <div class="resultat-tete">
         <p class="sur-titre">Votre décodage</p>
         <h2>Ce qu'il y a derrière l'annonce.</h2>
-        <p class="resultat-intro">Cette analyse est une <strong>base de travail</strong>, pas un verdict : vérifiez les faits importants avant de décider. C'est le « V » de la méthode DEV.</p>
+        <p class="resultat-intro">Cette analyse est une <strong>base de travail</strong>, pas un verdict : vérifiez les faits importants avant de décider. C'est le « V » de la grille DEV.</p>
         <div class="resultat-actions">
           <button id="print-btn" class="btn btn-prim" type="button">Télécharger en PDF</button>
           <button id="copy-btn" class="btn btn-sec" type="button">Copier le texte</button>
@@ -215,6 +214,6 @@
   <script src="assets/vendor/mammoth.browser.min.js"></script>
   <script src="assets/vendor/marked.min.js"></script>
   <script src="assets/vendor/purify.min.js"></script>
-  <script src="assets/js/decodeur.js?v=7"></script>
+  <script src="assets/js/decodeur.js?v=8"></script>
 </body>
 </html>
