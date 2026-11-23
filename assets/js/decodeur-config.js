@@ -10,7 +10,7 @@ window.DECODEUR = {
   CODE_REQUIS: true,
 
   // Lien pour obtenir un code (page Payhip). Vide = on invite à écrire.
-  LIEN_CODE: "",
+  LIEN_CODE: "https://payhip.com/b/MjdBF",
   CONTACT: "mailto:shirley.chiche@buildrh.co?subject=D%C3%A9codeur%20d'offres%20%E2%80%94%20code%20d'acc%C3%A8s",
 
   // Suites proposées en fin d'analyse (écran et PDF) — mêmes offres que Le Bon Angle.

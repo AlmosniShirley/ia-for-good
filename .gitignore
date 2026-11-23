@@ -2,3 +2,4 @@ worker/.wrangler/
 .DS_Store
 node_modules/
 /exemples/
+/payhip/
