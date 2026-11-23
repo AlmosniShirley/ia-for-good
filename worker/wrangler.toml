@@ -10,7 +10,7 @@ DUST_WORKSPACE_ID = "LiNKoSV40F"
 # Identifiant de l'agent « analyse de poste »
 DUST_AGENT_ID = "V0aYuVjSL3"
 ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
-PAYHIP_MAX_USES = "1"
+PAYHIP_MAX_USES = "5"
 
 # Secrets — jamais dans ce fichier (à saisir dans Cloudflare) :
 #   DUST_API_KEY, ACCESS_CODE, et plus tard PAYHIP_SECRET
