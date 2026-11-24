@@ -1,5 +1,5 @@
 /* =====================================================================
-   IA FOR GOOD — Coach d'entretien de recrutement (page coach-recrutement.html)
+   IA FOR GOOD — Feedback d'entretien de recrutement (page feedback-entretien.html)
    1. Lecture d'un document dans le navigateur (PDF, DOCX, TXT)
    2. Envoi au relais Cloudflare (POST /analyze puis GET /result)
    3. Affichage du résultat (Markdown nettoyé par DOMPurify)
@@ -8,7 +8,7 @@
 (function () {
   "use strict";
 
-  var C = window.COACH_RECRUTEMENT || {};
+  var C = window.FEEDBACK_ENTRETIEN || {};
   var API = String(C.API_URL || "").trim().replace(/\/$/, "");
   var CODE_REQUIS = C.CODE_REQUIS !== false;
   var MAX = C.MAX_CARACTERES || 60000;
@@ -30,7 +30,7 @@
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-contact]"), function (a) { a.href = C.CONTACT || "index.html"; });
 
-  /* ---------- 1. Lecture des documents (offre, CV) ---------- */
+  /* ---------- 1. Lecture des documents (transcription, offre, CV) ---------- */
   function readPdf(file) {
     var pdfjs = window.pdfjsLib;
     if (!pdfjs) return Promise.reject(new Error("Lecteur PDF indisponible. Collez son texte dans le champ prévu."));
@@ -62,7 +62,7 @@
       if (!window.mammoth) return Promise.reject(new Error("Lecteur Word indisponible. Collez son texte."));
       return file.arrayBuffer().then(function (buf) { return window.mammoth.extractRawText({ arrayBuffer: buf }); }).then(function (r) { return r.value; });
     }
-    if (name.endsWith(".txt") || name.endsWith(".md") || file.type.indexOf("text/") === 0) return file.text();
+    if (name.endsWith(".txt") || name.endsWith(".md") || name.endsWith(".vtt") || name.endsWith(".srt") || file.type.indexOf("text/") === 0) return file.text();
     if (name.endsWith(".doc")) return Promise.reject(new Error("Le format .doc n'est pas pris en charge : enregistrez le document en .docx ou en PDF."));
     return Promise.reject(new Error("Format non pris en charge. Utilisez un PDF, un .docx ou un fichier texte."));
   }
@@ -97,26 +97,26 @@
 
   function buildMessage() {
     var clean = $("redact").checked ? redact : function (t) { return t; };
-    var parts = ["Bonjour. Je suis candidat·e et je souhaite préparer un entretien de recrutement à partir des informations ci-dessous."];
+    var parts = ["Bonjour. Je suis candidat·e et j'ai passé un entretien de recrutement. Je souhaite un feedback sur cet entretien à partir de sa transcription (ou de mes notes) et des informations ci-dessous."];
 
     var ctx = [];
     if (val("poste")) ctx.push("- Poste visé : " + clean(val("poste")));
     if (val("entreprise")) ctx.push("- Entreprise : " + clean(val("entreprise")));
     if (val("type-entretien")) ctx.push("- Type d'entretien : " + val("type-entretien"));
-    if (val("date-entretien")) ctx.push("- Date de l'entretien : " + val("date-entretien"));
-    if (val("contexte")) ctx.push("### Ce que je sais déjà (interlocuteurs, format, étapes)\n" + clean(val("contexte")));
+    if (val("issue")) ctx.push("- Où j'en suis : " + val("issue"));
+    if (val("contexte")) ctx.push("### Contexte (interlocuteurs, format, étape du processus)\n" + clean(val("contexte")));
     parts.push("## 1. L'entretien\n" + (ctx.length ? ctx.join("\n") : "Non précisé."));
 
-    parts.push("## 2. L'offre d'emploi\n" + clean(val("annonce-text")));
-    parts.push("## 3. Mon CV\n" + (val("cv-text") ? clean(val("cv-text")) : "Non fourni. Signale-le dans la synthèse et appuie-toi sur ce que je dis de moi ci-dessous."));
+    parts.push("## 2. Transcription de l'entretien (ou mes notes)\n" + clean(val("transcription-text")));
+    parts.push("## 3. L'offre d'emploi\n" + (val("annonce-text") ? clean(val("annonce-text")) : "Non fournie. Signale-le et déduis les attentes du poste de ce qui a été dit pendant l'entretien."));
+    if (val("cv-text")) parts.push("## 4. Mon CV\n" + clean(val("cv-text")));
 
     var moi = [];
-    if (val("motivation")) moi.push("### Pourquoi ce poste m'intéresse\n" + clean(val("motivation")));
-    if (val("exemples")) moi.push("### Expériences ou réussites que j'aimerais mettre en avant\n" + clean(val("exemples")));
-    if (val("sensibles")) moi.push("### Points sensibles ou questions que je redoute\n" + clean(val("sensibles")));
-    parts.push("## 4. Moi\n" + (moi.length ? moi.join("\n\n") : "Non précisé."));
+    if (val("ressenti")) moi.push("### Comment je l'ai vécu\n" + clean(val("ressenti")));
+    if (val("attentes")) moi.push("### Sur quoi je veux un retour en priorité\n" + clean(val("attentes")));
+    if (moi.length) parts.push("## 5. Mon ressenti\n" + moi.join("\n\n"));
 
-    parts.push("Réponds en français, en Markdown, en t'adressant directement à moi. Commence par une section « ## Synthèse » de 4 à 6 lignes, puis une section de niveau 2 (##) par grande partie de ta méthode. N'invente aucune expérience, aucune réalisation ni aucun chiffre : appuie-toi uniquement sur mon CV et ce que je t'ai dit ; si une information manque, signale-le et propose comment la formuler honnêtement. Important : cette demande est unique, je ne pourrai pas te répondre. Livre donc la préparation complète en une seule réponse, sans étape de validation ni question finale qui attend une réponse : si une information manque, fais une hypothèse explicite, signale-la et poursuis. Inclus notamment ce que le recruteur cherche vraiment à vérifier, mon pitch de présentation, les questions probables avec des pistes de réponse fondées sur mes expériences réelles, la façon d'aborder mes points sensibles, les questions à poser au recruteur et une check-list pour la veille de l'entretien. Ne me propose pas de continuer l'échange avec toi (je ne peux pas te répondre) : termine exactement par cette phrase, seule sur sa ligne : « Vous pouvez vous entraîner en réalisant avec Shirley une simulation d'entretien de recrutement : utilisez le bouton « Je souhaite être recontacté·e » ci-dessous. »");
+    parts.push("Réponds en français, en Markdown, en t'adressant directement à moi, avec un ton franc et bienveillant. Commence par une section « ## Synthèse » de 4 à 6 lignes, puis une section de niveau 2 (##) par grande partie de ta méthode. Appuie chaque remarque sur ce qui a réellement été dit : cite de courts extraits de la transcription. N'invente aucun échange, aucune expérience ni aucun chiffre ; si la transcription est incomplète ou ambiguë, signale-le. Ne prédis pas la décision du recruteur : parle de perception probable. Important : cette demande est unique, je ne pourrai pas te répondre. Livre donc le feedback complet en une seule réponse, sans étape de validation ni question finale qui attend une réponse. Ne me propose pas de continuer l'échange avec toi. Termine exactement par cette phrase, seule sur sa ligne : « Vous pouvez vous entraîner en réalisant avec Shirley une simulation d'entretien de recrutement : utilisez le bouton « Je souhaite être recontacté·e » ci-dessous. »");
     return parts.join("\n\n");
   }
 
@@ -131,23 +131,23 @@
         }
         return data;
       });
-    }, function () { throw new Error("Connexion impossible au Coach. Vérifiez votre connexion Internet, puis réessayez."); });
+    }, function () { throw new Error("Connexion impossible à l'outil. Vérifiez votre connexion Internet, puis réessayez."); });
   }
 
   var ETAPES = [
-    [6, "L'outil relit l'offre et votre parcours…"],
-    [18, "Repérage de ce que le recruteur cherche à vérifier…"],
-    [36, "Préparation de votre pitch et de vos réponses…"],
-    [60, "Rédaction des questions à poser au recruteur…"],
-    [90, "Toujours en cours : les préparations complètes prennent parfois un peu plus de temps…"],
+    [6, "L'outil relit l'entretien…"],
+    [18, "Analyse de vos réponses, une à une…"],
+    [36, "Repérage de ce que le recruteur a probablement retenu…"],
+    [60, "Rédaction de vos axes de progression…"],
+    [90, "Toujours en cours : les analyses complètes prennent parfois un peu plus de temps…"],
   ];
   function poll(cId, n) {
     return new Promise(function (res) { setTimeout(res, POLL_MS); }).then(function () {
       return api("/result?c=" + encodeURIComponent(cId));
     }).then(function (data) {
       if (data.status === "done") return data.content || "";
-      if (data.status === "error") throw new Error(data.error || "La préparation n'a pas abouti. Écrivez-moi : votre préparation sera recréditée.");
-      if (n >= POLL_MAX) throw new Error("La préparation prend plus de temps que prévu. Écrivez-moi si le problème persiste.");
+      if (data.status === "error") throw new Error(data.error || "L'analyse n'a pas abouti. Écrivez-moi : votre analyse sera recréditée.");
+      if (n >= POLL_MAX) throw new Error("L'analyse prend plus de temps que prévu. Écrivez-moi si le problème persiste.");
       ETAPES.forEach(function (e) { if (n === e[0]) $("progress-text").textContent = e[1]; });
       return poll(cId, n + 1);
     });
@@ -157,7 +157,7 @@
     $("submit-btn").disabled = busy;
     $("form").hidden = busy;
     $("progress").hidden = !busy;
-    if (busy) { $("progress-text").textContent = "Préparation en cours…"; $("progress").focus(); }
+    if (busy) { $("progress-text").textContent = "Analyse en cours…"; $("progress").focus(); }
   }
 
   function showError(msg, el) {
@@ -172,17 +172,17 @@
     $("service-full").hidden = true;
     Array.prototype.forEach.call(document.querySelectorAll("[aria-invalid]"), function (el) { el.removeAttribute("aria-invalid"); });
 
-    if (val("annonce-text").length < 200) return showError("Ajoutez le texte de l'offre d'emploi (déposez-la ou collez-la au bloc 2).", $("annonce-text"));
-    if (val("cv-text").length + val("exemples").length + val("motivation").length < 80) return showError("Ajoutez votre CV ou, à défaut, décrivez votre parcours et ce que vous aimeriez mettre en avant (bloc 4).", $("cv-text"));
+    if (val("transcription-text").length < 400) return showError("Ajoutez la transcription de l'entretien ou vos notes détaillées (bloc 2) : les questions posées et vos réponses.", $("transcription-text"));
     if (CODE_REQUIS && !val("access")) return showError("Saisissez votre code d'accès.", $("access"));
-    if (!$("consent").checked) return showError("Cochez la case d'accord pour lancer la préparation.", $("consent"));
+    if (!$("consent").checked) return showError("Cochez la case d'accord pour lancer l'analyse.", $("consent"));
     var message = buildMessage();
-    if (message.length > MAX) return showError("L'ensemble dépasse " + MAX.toLocaleString("fr-FR") + " caractères : raccourcissez vos textes ou les documents.", $("annonce-text"));
+    if (message.length > MAX) return showError("L'ensemble dépasse " + MAX.toLocaleString("fr-FR") + " caractères : retirez les passages hors sujet de la transcription (accueil, échanges techniques de connexion) ou raccourcissez l'offre et le CV.", $("transcription-text"));
 
     lastRequest = {
       poste: [val("poste"), val("entreprise")].filter(Boolean).join(" · "),
       type: val("type-entretien"),
       cv: !!val("cv-text"),
+      annonce: !!val("annonce-text"),
     };
     setBusy(true);
     api("/analyze", {
@@ -192,7 +192,7 @@
     }).then(function (data) {
       var rem = $("remaining");
       rem.hidden = typeof data.remaining !== "number";
-      if (!rem.hidden) rem.textContent = data.remaining > 0 ? "Il vous reste " + data.remaining + " préparation" + (data.remaining > 1 ? "s" : "") + " avec ce code." : "C'était la préparation incluse avec ce code.";
+      if (!rem.hidden) rem.textContent = data.remaining > 0 ? "Il vous reste " + data.remaining + " analyse" + (data.remaining > 1 ? "s" : "") + " avec ce code." : "C'était l'analyse incluse avec ce code.";
       return poll(data.conversationId, 1);
     }).then(showResult).catch(function (err) {
       setBusy(false);
@@ -230,8 +230,8 @@
 
   var lastRequest = {};
   function remplirSuites() {
-    var sujet = "Coach d'entretien de recrutement — je souhaite être recontacté·e";
-    var corps = "Bonjour Shirley,\n\nJ'ai utilisé le Coach d'entretien de recrutement sur IA FOR GOOD.\nJe souhaiterais échanger avec vous (simulation d'entretien ou préparation).\n\nPoste visé :\n\nDate de mon entretien :\n\nMes disponibilités :\n\n";
+    var sujet = "Feedback d'entretien — simulation d'entretien de recrutement";
+    var corps = "Bonjour Shirley,\n\nJ'ai utilisé le Feedback d'entretien de recrutement sur IA FOR GOOD.\nJe souhaiterais m'entraîner avec vous lors d'une simulation d'entretien de recrutement.\n\nPoste visé :\n\nDate de mon prochain entretien (si je la connais) :\n\nMes disponibilités :\n\n";
     $("recontact-btn").href = "mailto:" + (C.EMAIL || "") + "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
     $("recontact-btn").closest(".recontact").hidden = !C.EMAIL;
     $("print-email").textContent = C.EMAIL || "";
@@ -243,7 +243,7 @@
     lastMarkdown = markdown;
     $("sum-poste").textContent = lastRequest.poste || "Non précisé";
     $("sum-type").textContent = lastRequest.type || "Non précisé";
-    $("sum-annonce").textContent = "Fournie";
+    $("sum-annonce").textContent = lastRequest.annonce ? "Fournie" : "Non fournie";
     $("sum-cv").textContent = lastRequest.cv ? "Fourni" : "Non fourni";
     remplirSuites();
     $("print-date").textContent = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -278,7 +278,7 @@
   function downloadResult() {
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([lastMarkdown], { type: "text/markdown;charset=utf-8" }));
-    a.download = "preparation-entretien-recrutement.md";
+    a.download = "feedback-entretien-recrutement.md";
     document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
     $("copy-status").textContent = "Fichier téléchargé (format Markdown).";
@@ -287,7 +287,7 @@
   function printResult() {
     var d = new Date(), prev = document.title, pad = function (n) { return (n < 10 ? "0" : "") + n; };
     $("print-date").textContent = d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-    document.title = "Préparation entretien de recrutement IA FOR GOOD " + pad(d.getDate()) + "-" + pad(d.getMonth() + 1) + "-" + d.getFullYear();
+    document.title = "Feedback entretien de recrutement IA FOR GOOD " + pad(d.getDate()) + "-" + pad(d.getMonth() + 1) + "-" + d.getFullYear();
     var restore = function () { document.title = prev; window.removeEventListener("afterprint", restore); };
     window.addEventListener("afterprint", restore);
     $("copy-status").textContent = "Dans la fenêtre qui s'ouvre, choisissez « Enregistrer au format PDF » comme destination.";
@@ -310,7 +310,7 @@
   if (!CODE_REQUIS) $("code-wrap").hidden = true;
   if (C.LIEN_CODE) $("code-aide").innerHTML = 'Pas encore de code ? <a href="' + encodeURI(C.LIEN_CODE) + '" target="_blank" rel="noopener">Obtenez-le ici</a>.';
 
-  ["annonce", "cv"].forEach(function (k) {
+  ["transcription", "annonce", "cv"].forEach(function (k) {
     var fi = $(k + "-file"), dz = $(k + "-dropzone");
     fi.addEventListener("change", function () { handleFile(fi.files[0], k); });
     $(k + "-text").addEventListener("input", function () { updateCount(k); });

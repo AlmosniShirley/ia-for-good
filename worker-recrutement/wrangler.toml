@@ -1,4 +1,4 @@
-# Relais « Coach d'entretien de recrutement » (Cloudflare Worker) — même principe que worker/ et worker-coach/
+# Relais « Feedback d'entretien de recrutement » (Cloudflare Worker) — même principe que worker/ et worker-coach/
 name = "ia-for-good-coach-recrutement"
 main = "src/index.js"
 compatibility_date = "2024-09-23"
@@ -7,7 +7,7 @@ compatibility_date = "2024-09-23"
 DUST_BASE_URL = "https://dust.tt"
 # Même espace Dust que le Décodeur et Le Bon Angle
 DUST_WORKSPACE_ID = "LiNKoSV40F"
-# Identifiant de l'agent « coach d'entretien de recrutement »
+# Identifiant de l'agent « feedback d'entretien de recrutement » (analyse un entretien passé)
 DUST_AGENT_ID = "MGNgxPhNpG"
 ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
 PAYHIP_MAX_USES = "1"
