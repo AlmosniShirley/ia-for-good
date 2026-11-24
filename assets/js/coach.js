@@ -67,23 +67,23 @@
     return Promise.reject(new Error("Format non pris en charge. Utilisez un PDF, un .docx ou un fichier texte."));
   }
 
-  function handleFile(file) {
+  function handleFile(file, k) {
     if (!file) return;
-    var st = $("file-status");
+    var st = $(k + "-status");
     st.textContent = "Lecture de « " + file.name + " »…";
     readFile(file).then(function (text) {
       text = (text || "").replace(/\r/g, "").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
       st.textContent = text.length < 200
         ? "Peu de texte trouvé. S'il s'agit d'un document scanné, copiez-collez son texte ci-dessous."
         : "« " + file.name + " » lu. Relisez le texte ci-dessous : c'est exactement ce qui sera transmis.";
-      $("doc-text").value = text;
-      updateCount();
+      $(k + "-text").value = text;
+      updateCount(k);
     }).catch(function (e) { st.textContent = e.message || "Impossible de lire ce fichier."; });
   }
 
-  function updateCount() {
-    var n = $("doc-text").value.trim().length;
-    $("doc-count").textContent = n ? n.toLocaleString("fr-FR") + " caractères" : "";
+  function updateCount(k) {
+    var n = $(k + "-text").value.trim().length;
+    $(k + "-count").textContent = n ? n.toLocaleString("fr-FR") + " caractères" : "";
   }
 
   /* ---------- 2. Message envoyé à l'agent ---------- */
@@ -117,9 +117,10 @@
     if (val("sensibles")) att.push("### Points sensibles ou inquiétudes\n" + clean(val("sensibles")));
     parts.push("## 3. Mes attentes\n" + (att.length ? att.join("\n\n") : "Non précisées."));
 
-    if (val("doc-text")) parts.push("## 4. Document fourni (fiche de poste, compte rendu précédent, grille d'évaluation…)\n" + clean(val("doc-text")));
+    parts.push("## 4. Ma dernière évaluation (compte rendu de l'an dernier ou grille d'évaluation de l'entreprise)\n" + (val("eval-text") ? clean(val("eval-text")) + "\n\nUtilise ce document : fais le bilan objectif par objectif de ce qui avait été fixé, reprends les critères et le vocabulaire de cette grille pour structurer ma préparation, et relève ce qui avait été convenu ou promis (formation, évolution, rémunération) et doit être suivi." : "Non fournie. Signale-le dans la synthèse et indique ce que ce document aurait apporté."));
+    if (val("doc-text")) parts.push("## 5. Ma fiche de poste\n" + clean(val("doc-text")));
 
-    parts.push("Réponds en français, en Markdown, en t'adressant directement à moi. Commence par une section « ## Synthèse » de 4 à 6 lignes, puis une section de niveau 2 (##) par grande partie de ta méthode. N'invente aucune réalisation ni aucun chiffre : si une information manque, signale-le et propose comment la retrouver.");
+    parts.push("Réponds en français, en Markdown, en t'adressant directement à moi. Commence par une section « ## Synthèse » de 4 à 6 lignes, puis une section de niveau 2 (##) par grande partie de ta méthode. N'invente aucune réalisation ni aucun chiffre : si une information manque, signale-le et propose comment la retrouver. Important : cette demande est unique, je ne pourrai pas te répondre. Livre donc la préparation complète en une seule réponse, sans étape de validation ni question finale qui attend une réponse : si une information manque, fais une hypothèse explicite, signale-la et poursuis. Inclus notamment l'argumentaire prêt à dire, les réponses aux objections probables du manager, les questions à poser, un plan B et des propositions d'objectifs pour l'année à venir.");
     return parts.join("\n\n");
   }
 
@@ -175,15 +176,16 @@
     $("service-full").hidden = true;
     Array.prototype.forEach.call(document.querySelectorAll("[aria-invalid]"), function (el) { el.removeAttribute("aria-invalid"); });
 
-    if (val("realisations").length + val("objectifs").length < 80) return showError("Décrivez au moins vos objectifs ou vos principales réalisations de l'année (quelques lignes suffisent).", $("realisations"));
+    if (val("realisations").length + val("objectifs").length + val("eval-text").length < 80) return showError("Décrivez au moins vos objectifs ou vos principales réalisations de l'année (quelques lignes suffisent).", $("realisations"));
     if (CODE_REQUIS && !val("access")) return showError("Saisissez votre code d'accès.", $("access"));
     if (!$("consent").checked) return showError("Cochez la case d'accord pour lancer la préparation.", $("consent"));
     var message = buildMessage();
-    if (message.length > MAX) return showError("L'ensemble dépasse " + MAX.toLocaleString("fr-FR") + " caractères : raccourcissez vos textes ou le document.", $("doc-text"));
+    if (message.length > MAX) return showError("L'ensemble dépasse " + MAX.toLocaleString("fr-FR") + " caractères : raccourcissez vos textes ou les documents.", $("eval-text"));
 
     lastRequest = {
       poste: val("poste"),
       doc: !!val("doc-text"),
+      evaluation: !!val("eval-text"),
       souhaits: val("souhaits").length > 140 ? val("souhaits").slice(0, 137) + "…" : val("souhaits"),
     };
     setBusy(true);
@@ -244,7 +246,8 @@
     markdown = String(markdown || "").replace(/[ \t]*:cite\[[^\]]*\]/g, "");
     lastMarkdown = markdown;
     $("sum-poste").textContent = lastRequest.poste || "Non précisé";
-    $("sum-doc").textContent = lastRequest.doc ? "Fourni" : "Aucun";
+    $("sum-eval").textContent = lastRequest.evaluation ? "Fournie" : "Non fournie";
+    $("sum-doc").textContent = lastRequest.doc ? "Fournie" : "Non fournie";
     $("sum-souhaits").textContent = lastRequest.souhaits || "Non précisées";
     remplirSuites();
     $("print-date").textContent = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -311,12 +314,14 @@
   if (!CODE_REQUIS) $("code-wrap").hidden = true;
   if (C.LIEN_CODE) $("code-aide").innerHTML = 'Pas encore de code ? <a href="' + encodeURI(C.LIEN_CODE) + '" target="_blank" rel="noopener">Obtenez-le ici</a>.';
 
-  var fi = $("doc-file"), dz = $("dropzone");
-  fi.addEventListener("change", function () { handleFile(fi.files[0]); });
-  $("doc-text").addEventListener("input", updateCount);
-  ["dragenter", "dragover"].forEach(function (t) { dz.addEventListener(t, function (e) { e.preventDefault(); dz.classList.add("survol"); }); });
-  ["dragleave", "drop"].forEach(function (t) { dz.addEventListener(t, function (e) { e.preventDefault(); dz.classList.remove("survol"); }); });
-  dz.addEventListener("drop", function (e) { var f = e.dataTransfer && e.dataTransfer.files[0]; if (f) handleFile(f); });
+  ["eval", "doc"].forEach(function (k) {
+    var fi = $(k + "-file"), dz = $(k + "-dropzone");
+    fi.addEventListener("change", function () { handleFile(fi.files[0], k); });
+    $(k + "-text").addEventListener("input", function () { updateCount(k); });
+    ["dragenter", "dragover"].forEach(function (t) { dz.addEventListener(t, function (e) { e.preventDefault(); dz.classList.add("survol"); }); });
+    ["dragleave", "drop"].forEach(function (t) { dz.addEventListener(t, function (e) { e.preventDefault(); dz.classList.remove("survol"); }); });
+    dz.addEventListener("drop", function (e) { var f = e.dataTransfer && e.dataTransfer.files[0]; if (f) handleFile(f, k); });
+  });
 
   $("form").addEventListener("submit", onSubmit);
   $("copy-btn").addEventListener("click", copyResult);

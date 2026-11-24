@@ -475,3 +475,6 @@ button.btn { cursor: pointer; font-family: inherit; }
 .retour blockquote p { margin: 0; font-style: italic; color: var(--ink); }
 .retour figcaption { margin-top: 6px; font-size: .84em; color: var(--ink-2); }
 @media print { .retour { break-inside: avoid; } }
+
+/* L’attribut hidden doit toujours l’emporter (ex. .progress en display:flex) */
+[hidden] { display: none !important; }

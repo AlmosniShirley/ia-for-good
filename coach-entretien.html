@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body class="page-outil">
   <a class="skip" href="#outil">Aller au formulaire</a>
@@ -68,8 +68,21 @@
         </fieldset>
 
         <fieldset class="bloc">
-          <legend><span class="num">2</span> Votre année <em>obligatoire</em></legend>
-          <label for="objectifs">Objectifs fixés l'an dernier</label>
+          <legend><span class="num">2</span> Votre dernière évaluation <em>fortement conseillé</em></legend>
+          <p class="aide-bloc">Le compte rendu de votre entretien de l'an dernier ou, à défaut, la grille d'évaluation vierge de votre entreprise. L'outil s'en sert pour faire le bilan des objectifs fixés, reprendre les critères sur lesquels vous serez évalué·e et vérifier ce qui avait été convenu (formation, évolution, rémunération). Sans ce document, la préparation reste possible mais moins précise.</p>
+          <div id="eval-dropzone" class="dropzone">
+            <input id="eval-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
+            <label for="eval-file"><strong>Déposez votre dernière évaluation</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
+          </div>
+          <p id="eval-status" class="statut" aria-live="polite"></p>
+          <label for="eval-text">Texte de l'évaluation <span class="aide">vous pouvez aussi le coller ici</span></label>
+          <textarea id="eval-text" rows="6"></textarea>
+          <p id="eval-count" class="compteur"></p>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">3</span> Votre année <em>obligatoire</em></legend>
+          <label for="objectifs">Objectifs fixés l'an dernier <span class="aide">inutile de les recopier s'ils figurent dans votre dernière évaluation</span></label>
           <textarea id="objectifs" rows="4" placeholder="Copiez vos objectifs, même approximativement. Aucun objectif fixé ? Dites-le."></textarea>
           <label for="realisations">Vos réalisations <span class="aide">projets, résultats, chiffres, retours reçus, ce que vous avez pris en charge au-delà de votre fiche de poste</span></label>
           <textarea id="realisations" rows="6" placeholder="En vrac, c'est très bien : l'outil vous aidera à les structurer."></textarea>
@@ -78,7 +91,7 @@
         </fieldset>
 
         <fieldset class="bloc">
-          <legend><span class="num">3</span> Vos attentes <em>facultatif</em></legend>
+          <legend><span class="num">4</span> Vos attentes <em>facultatif</em></legend>
           <label for="souhaits">Ce que vous voulez obtenir ou aborder</label>
           <textarea id="souhaits" rows="3" placeholder="Ex. : augmentation, promotion, formation, changement d'équipe, télétravail, passage à temps partiel…"></textarea>
           <label for="sensibles">Points sensibles ou inquiétudes</label>
@@ -86,20 +99,20 @@
         </fieldset>
 
         <fieldset class="bloc">
-          <legend><span class="num">4</span> Un document utile <em>facultatif</em></legend>
-          <p class="aide-bloc">Fiche de poste, compte rendu de l'entretien précédent ou grille d'évaluation de votre entreprise.</p>
-          <div id="dropzone" class="dropzone">
+          <legend><span class="num">5</span> Votre fiche de poste <em>facultatif</em></legend>
+          <p class="aide-bloc">Utile pour montrer ce que vous faites au-delà de votre périmètre officiel.</p>
+          <div id="doc-dropzone" class="dropzone">
             <input id="doc-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
-            <label for="doc-file"><strong>Déposez un document</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
+            <label for="doc-file"><strong>Déposez votre fiche de poste</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
           </div>
-          <p id="file-status" class="statut" aria-live="polite"></p>
-          <label for="doc-text">Texte du document <span class="aide">vous pouvez aussi le coller ici</span></label>
+          <p id="doc-status" class="statut" aria-live="polite"></p>
+          <label for="doc-text">Texte de la fiche de poste <span class="aide">vous pouvez aussi le coller ici</span></label>
           <textarea id="doc-text" rows="6"></textarea>
           <p id="doc-count" class="compteur"></p>
         </fieldset>
 
         <fieldset class="bloc">
-          <legend><span class="num">5</span> Lancer la préparation</legend>
+          <legend><span class="num">6</span> Lancer la préparation</legend>
           <div id="code-wrap">
             <label for="access">Code d'accès</label>
             <input id="access" type="text" autocomplete="off" spellcheck="false">
@@ -149,7 +162,8 @@
         <p class="liste-titre">Votre demande</p>
         <dl>
           <dt>Poste</dt><dd id="sum-poste"></dd>
-          <dt>Document</dt><dd id="sum-doc"></dd>
+          <dt>Dernière évaluation</dt><dd id="sum-eval"></dd>
+          <dt>Fiche de poste</dt><dd id="sum-doc"></dd>
           <dt>Attentes</dt><dd id="sum-souhaits"></dd>
         </dl>
       </div>
@@ -186,11 +200,11 @@
     </div>
   </footer>
 
-  <script src="assets/js/coach-config.js?v=2"></script>
+  <script src="assets/js/coach-config.js?v=3"></script>
   <script src="assets/vendor/pdf.min.js"></script>
   <script src="assets/vendor/mammoth.browser.min.js"></script>
   <script src="assets/vendor/marked.min.js"></script>
   <script src="assets/vendor/purify.min.js"></script>
-  <script src="assets/js/coach.js?v=1"></script>
+  <script src="assets/js/coach.js?v=2"></script>
 </body>
 </html>
