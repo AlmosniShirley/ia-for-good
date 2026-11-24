@@ -4,3 +4,4 @@ node_modules/
 /exemples/
 /payhip/
 worker-coach/.wrangler/
+.wrangler/

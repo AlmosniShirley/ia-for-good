@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fbf7f8">
+  <title>Coach d'entretien de recrutement · IA FOR GOOD</title>
+  <meta name="description" content="Préparez votre entretien d'embauche : votre pitch, vos réponses aux questions probables, vos exemples concrets et les questions à poser au recruteur.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/poppins-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css?v=18">
+</head>
+<body class="page-outil">
+  <a class="skip" href="#outil">Aller au formulaire</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="marque" href="index.html" aria-label="IA FOR GOOD, accueil">
+        <svg class="marque-picto" viewBox="0 0 40 40" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5288f"/><stop offset="1" stop-color="#8a2c8e"/></linearGradient></defs>
+          <rect width="40" height="40" rx="11" fill="url(#g)"/>
+          <path d="M20 29s-8-4.6-8-10.4A4.6 4.6 0 0 1 20 16a4.6 4.6 0 0 1 8 2.6C28 24.4 20 29 20 29z" fill="#fff"/>
+          <path d="M29.5 8.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="#fff"/>
+        </svg>
+        <span class="marque-txt">IA <b>FOR GOOD</b></span>
+      </a>
+      <a class="par-buildrh" href="https://build-rh.io/" target="_blank" rel="noopener" aria-label="Une plateforme BUILD RH">
+        <span>par</span><img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="120" height="37">
+      </a>
+      <button id="confort" class="toggle" type="button" aria-pressed="false"><span aria-hidden="true">Aa</span> <i class="lbl" style="font-style:normal">Lecture confort</i></button>
+    </div>
+  </header>
+
+  <section class="hero hero-outil">
+    <div class="wrap">
+      <p class="sur-titre"><a href="index.html#recrutement">Préparer un entretien d'embauche</a> · 1 préparation par code</p>
+      <h1>Coach d'entretien <span class="hl">de recrutement.</span></h1>
+      <p class="lead">Vous avez décroché un entretien. Arrivez-y préparé·e : un pitch qui relie votre parcours au poste, des réponses construites à partir de vos vraies expériences, des points sensibles anticipés et des questions qui montrent que vous avez compris l'enjeu du rôle.</p>
+      <ul class="points-cles">
+        <li><strong>Votre parcours relié au poste</strong> : pitch de présentation, exemples concrets, réponses aux questions probables</li>
+        <li><strong>Les points sensibles anticipés</strong> : trous dans le CV, reconversion, prétentions salariales, et les questions à poser au recruteur</li>
+      </ul>
+    </div>
+  </section>
+
+  <main id="outil" class="wrap outil" tabindex="-1">
+
+    <div id="ferme" class="encart" hidden>
+      <h2>Le Coach d'entretien de recrutement ouvre très bientôt</h2>
+      <p>Il est en cours de test. Vous voulez faire partie des premiers à l'essayer ? <a data-contact href="#">Écrivez-moi</a>.</p>
+    </div>
+
+    <div id="app">
+      <form id="form" novalidate>
+        <fieldset class="bloc">
+          <legend><span class="num">1</span> L'entretien <em>conseillé</em></legend>
+          <div class="deux">
+            <div><label for="poste">Poste visé</label><input id="poste" type="text" placeholder="Ex. : Product Manager senior"></div>
+            <div><label for="entreprise">Entreprise <span class="aide">facultatif</span></label><input id="entreprise" type="text" placeholder="Ex. : éditeur SaaS RH, 200 personnes"></div>
+          </div>
+          <div class="deux">
+            <div>
+              <label for="type-entretien">Type d'entretien</label>
+              <select id="type-entretien">
+                <option value="">Je ne sais pas encore</option>
+                <option>Premier échange avec un·e recruteur·se ou les RH</option>
+                <option>Entretien avec le ou la future manager</option>
+                <option>Entretien technique ou cas pratique</option>
+                <option>Entretien final (direction, équipe, culture)</option>
+              </select>
+            </div>
+            <div><label for="date-entretien">Date de l'entretien <span class="aide">facultatif</span></label><input id="date-entretien" type="text" placeholder="Ex. : jeudi prochain"></div>
+          </div>
+          <label for="contexte">Ce que vous savez déjà <span class="aide">interlocuteurs, format, durée, étapes du processus, échanges précédents</span></label>
+          <textarea id="contexte" rows="3" placeholder="Ex. : visio de 45 min avec la CTO, deuxième étape sur quatre, le premier appel RH s'est bien passé…"></textarea>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">2</span> L'offre d'emploi <em>obligatoire</em></legend>
+          <p class="aide-bloc">Le texte de l'annonce ou la fiche de poste transmise par le recruteur. C'est à partir d'elle que l'outil anticipe les questions et les attentes.</p>
+          <div id="annonce-dropzone" class="dropzone">
+            <input id="annonce-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
+            <label for="annonce-file"><strong>Déposez l'offre</strong> ou cliquez pour la choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
+          </div>
+          <p id="annonce-status" class="statut" aria-live="polite"></p>
+          <label for="annonce-text">Texte de l'offre <span class="aide">vous pouvez aussi le coller ici</span></label>
+          <textarea id="annonce-text" rows="7"></textarea>
+          <p id="annonce-count" class="compteur"></p>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">3</span> Votre CV <em>fortement conseillé</em></legend>
+          <p class="aide-bloc">L'outil s'en sert pour relier vos expériences réelles aux attentes du poste et repérer les points qu'on risque de vous demander d'expliquer. Sans CV, décrivez au moins votre parcours au bloc 4.</p>
+          <div id="cv-dropzone" class="dropzone">
+            <input id="cv-file" type="file" accept=".pdf,.docx,.txt,.md,application/pdf">
+            <label for="cv-file"><strong>Déposez votre CV</strong> ou cliquez pour le choisir <span class="aide">PDF, Word (.docx) ou texte · lu dans votre navigateur</span></label>
+          </div>
+          <p id="cv-status" class="statut" aria-live="polite"></p>
+          <label for="cv-text">Texte du CV <span class="aide">vous pouvez aussi le coller ici</span></label>
+          <textarea id="cv-text" rows="6"></textarea>
+          <p id="cv-count" class="compteur"></p>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">4</span> Vous <em>facultatif</em></legend>
+          <label for="motivation">Pourquoi ce poste vous intéresse</label>
+          <textarea id="motivation" rows="3" placeholder="En vrac, c'est très bien : l'outil vous aidera à le formuler."></textarea>
+          <label for="exemples">Expériences ou réussites que vous aimeriez mettre en avant</label>
+          <textarea id="exemples" rows="3" placeholder="Ex. : refonte d'un parcours d'onboarding, équipe montée de zéro, incident de production géré…"></textarea>
+          <label for="sensibles">Points sensibles ou questions que vous redoutez</label>
+          <textarea id="sensibles" rows="3" placeholder="Ex. : une période sans emploi, une reconversion, un départ rapide, les prétentions salariales…"></textarea>
+        </fieldset>
+
+        <fieldset class="bloc">
+          <legend><span class="num">5</span> Lancer la préparation</legend>
+          <div id="code-wrap">
+            <label for="access">Code d'accès</label>
+            <input id="access" type="text" autocomplete="off" spellcheck="false">
+            <p class="aide-bloc" id="code-aide">Pas encore de code ? <a data-contact href="#">Écrivez-moi</a>.</p>
+          </div>
+          <label class="case"><input id="redact" type="checkbox" checked> Masquer automatiquement les e-mails et téléphones avant l'envoi</label>
+          <label class="case"><input id="consent" type="checkbox"> J'accepte que ces textes soient transmis à l'outil d'analyse IA (hébergé chez Dust) pour produire la préparation. Rien n'est conservé sur ce site (<a href="confidentialite.html" target="_blank" rel="noopener">confidentialité</a>). En lançant la préparation, je demande son exécution immédiate et reconnais perdre mon droit de rétractation (<a href="cgv.html" target="_blank" rel="noopener">CGV</a>).</label>
+          <p class="aide-bloc">Conseil : retirez de votre CV votre adresse postale et toute information que vous ne souhaitez pas transmettre.</p>
+          <p id="form-error" class="erreur" role="alert" hidden></p>
+          <div id="service-full" class="erreur" tabindex="-1" hidden>Le Coach est très demandé en ce moment et l'outil n'a pas pu être joint. Votre code n'a pas été utilisé : réessayez un peu plus tard.</div>
+          <button id="submit-btn" class="btn btn-prim btn-grand" type="submit">Préparer mon entretien</button>
+          <p class="aide-bloc">La préparation prend en général quelques minutes. Gardez la page ouverte.</p>
+        </fieldset>
+      </form>
+
+      <div id="progress" class="encart progress" tabindex="-1" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <div><strong id="progress-text">Préparation en cours…</strong><p>L'outil relit l'offre et votre parcours, anticipe les questions et prépare vos réponses.</p></div>
+      </div>
+    </div>
+
+    <section id="result" class="resultat" tabindex="-1" hidden>
+      <div class="print-only print-tete">
+        <div class="print-marques">
+          <span class="marque-txt">IA <b>FOR GOOD</b></span>
+          <img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="150" height="47">
+        </div>
+        <p class="print-kicker">Coach d'entretien de recrutement</p>
+        <p class="print-titre">Ma préparation d'entretien de recrutement</p>
+        <p class="print-date">Établie le <span id="print-date"></span></p>
+      </div>
+
+      <div class="resultat-tete">
+        <p class="sur-titre">Votre préparation</p>
+        <h2>Votre pitch, vos réponses, vos questions.</h2>
+        <p class="resultat-intro">Cette préparation est une <strong>base de travail</strong> : relisez-la, corrigez ce qui ne vous ressemble pas, entraînez-vous à voix haute et gardez vos propres mots le jour de l'entretien.</p>
+        <div class="resultat-actions">
+          <button id="print-btn" class="btn btn-prim" type="button">Télécharger en PDF</button>
+          <button id="copy-btn" class="btn btn-sec" type="button">Copier le texte</button>
+          <button id="download-btn" class="btn btn-sec" type="button">Texte brut (.md)</button>
+        </div>
+        <p id="copy-status" class="statut" aria-live="polite"></p>
+        <p id="remaining" class="statut" hidden></p>
+      </div>
+
+      <div class="encart demande">
+        <p class="liste-titre">Votre demande</p>
+        <dl>
+          <dt>Poste visé</dt><dd id="sum-poste"></dd>
+          <dt>Type d'entretien</dt><dd id="sum-type"></dd>
+          <dt>Offre</dt><dd id="sum-annonce"></dd>
+          <dt>CV</dt><dd id="sum-cv"></dd>
+        </dl>
+      </div>
+      <nav id="toc-wrap" class="encart sommaire" aria-label="Sommaire de la préparation" hidden><strong>Sommaire</strong><ul id="toc"></ul></nav>
+      <div id="result-body" class="resultat-corps"></div>
+
+      <div class="suites">
+        <h3 class="suites-titre">Pour aller plus loin, avec Shirley</h3>
+        <div class="encart recontact">
+          <p><strong>Un entretien décisif ? Envie de vous entraîner en conditions réelles ?</strong> Shirley peut faire une simulation d'entretien avec vous. Un e-mail déjà rédigé s'ouvre : vous n'avez plus qu'à l'envoyer.</p>
+          <a class="btn btn-sec" id="recontact-btn" href="#">Je souhaite être recontacté·e</a>
+        </div>
+      </div>
+
+      <div class="print-only print-suite">
+        <p class="print-suite-titre">Pour aller plus loin, avec Shirley</p>
+        <p>Pour une simulation d'entretien : <strong id="print-email"></strong></p>
+      </div>
+      <p class="print-only print-mention">Préparation rédigée par un agent d'IA configuré selon la méthode de Shirley Almosni Chiche (BUILD RH), à partir des seules informations fournies. C'est une base de travail, à relire et à adapter : elle peut contenir des imprécisions et ne garantit aucun résultat de recrutement. IA FOR GOOD est une plateforme BUILD RH.</p>
+
+      <p class="avertissement"><strong>Confidentialité.</strong> Ce site n'a rien conservé : si vous fermez cette page, la préparation disparaît de votre écran. Téléchargez-la ou copiez-la.</p>
+      <p><button id="restart-btn" class="btn btn-sec" type="button">Nouvelle préparation</button></p>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="wrap pied-in">
+      <div>
+        <a class="pied-logo" href="https://build-rh.io/" target="_blank" rel="noopener"><img src="assets/logo-buildrh-couleur.svg" alt="BUILD RH" width="150" height="47"></a>
+        <p class="pied-marque">IA <b>FOR GOOD</b></p>
+        <p class="pied-txt">Coach d'entretien de recrutement conçu selon la méthode de Shirley Almosni Chiche · BUILD RH. <a data-contact href="#">Une question ?</a></p>
+        <p class="pied-txt pied-legal"><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgv.html">Conditions générales de vente</a> · Sans cookie ni mesure d'audience.</p>
+      </div>
+      <ul class="pied-liens"><li><a href="index.html">Tous les agents et contenus</a></li><li><a href="https://almosnishirley.github.io/le-bon-angle/" target="_blank" rel="noopener">Le Bon Angle</a></li><li><a href="https://build-rh.io/" target="_blank" rel="noopener">BUILD RH</a></li></ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/recrutement-config.js?v=1"></script>
+  <script src="assets/vendor/pdf.min.js"></script>
+  <script src="assets/vendor/mammoth.browser.min.js"></script>
+  <script src="assets/vendor/marked.min.js"></script>
+  <script src="assets/vendor/purify.min.js"></script>
+  <script src="assets/js/recrutement.js?v=1"></script>
+</body>
+</html>
