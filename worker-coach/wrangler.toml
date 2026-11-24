@@ -10,7 +10,7 @@ DUST_WORKSPACE_ID = "LiNKoSV40F"
 # Identifiant de l'agent « coach d'entretien annuel »
 DUST_AGENT_ID = "zyrnE2001m"
 ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
-PAYHIP_MAX_USES = "5"
+PAYHIP_MAX_USES = "1"
 
 # Secrets — jamais dans ce fichier (npx wrangler secret put <NOM> depuis worker-coach/) :
 #   DUST_API_KEY, ACCESS_CODE, TESTER_CODES, et plus tard PAYHIP_SECRET
