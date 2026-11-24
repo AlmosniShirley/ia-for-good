@@ -9,7 +9,7 @@ window.FEEDBACK_ENTRETIEN = {
   CODE_REQUIS: true,
 
   // Lien pour obtenir un code (page Payhip). Vide = on invite à écrire.
-  LIEN_CODE: "",
+  LIEN_CODE: "https://payhip.com/b/0I8Kq",
   CONTACT: "mailto:shirley.chiche@buildrh.co?subject=Feedback%20d'entretien%20de%20recrutement%20%E2%80%94%20code%20d'acc%C3%A8s",
   EMAIL: "shirley.chiche@buildrh.co",
 
