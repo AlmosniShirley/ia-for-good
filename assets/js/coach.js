@@ -312,7 +312,7 @@
   /* ---------- Initialisation ---------- */
   if (!API) { $("app").hidden = true; $("ferme").hidden = false; return; }
   if (!CODE_REQUIS) $("code-wrap").hidden = true;
-  if (C.LIEN_CODE) $("code-aide").innerHTML = 'Pas encore de code ? <a href="' + encodeURI(C.LIEN_CODE) + '" target="_blank" rel="noopener">Obtenez-le ici</a>.';
+  if (C.LIEN_CODE) $("code-aide").innerHTML = 'Pas encore de code ? <a href="' + encodeURI(C.LIEN_CODE) + '" target="_blank" rel="noopener">Achetez-le ici (5 €, reçu aussitôt par e-mail)</a>.';
 
   ["eval", "doc"].forEach(function (k) {
     var fi = $(k + "-file"), dz = $(k + "-dropzone");
