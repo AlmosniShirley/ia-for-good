@@ -12,5 +12,11 @@ DUST_AGENT_ID = "MGNgxPhNpG"
 ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
 PAYHIP_MAX_USES = "1"
 
+# Compteur des codes à quota (QUOTA_CODES)
+[[kv_namespaces]]
+binding = "USAGE"
+id = "5d9fad8713194a89a532ae1b261aaad1"
+
 # Secrets — jamais dans ce fichier (npx wrangler secret put <NOM> depuis worker-recrutement/) :
-#   DUST_API_KEY, ACCESS_CODE, TESTER_CODES, et plus tard PAYHIP_SECRET
+#   DUST_API_KEY, ACCESS_CODE, TESTER_CODES, PAYHIP_SECRET,
+#   QUOTA_CODES (codes à nombre d'analyses limité : "CODE1=5,CODE2=3")

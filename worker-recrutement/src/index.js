@@ -16,6 +16,8 @@
      DUST_API_KEY    clé API Dust (obligatoire)
      ACCESS_CODE     code personnel illimité (Shirley)
      TESTER_CODES    codes testeurs illimités, séparés par des virgules
+     QUOTA_CODES     codes à nombre d'analyses limité, ex. "FB5-ABCD=5,FB3-WXYZ=3"
+                     (compteur dans le KV « USAGE » ; retirer un code le coupe)
      PAYHIP_SECRET   (plus tard, si le produit devient payant ou à 0 €)
                      « product secret key » du produit Payhip
 
@@ -118,7 +120,21 @@ export default {
           .map((c) => String(c || "").trim().toUpperCase())
           .filter(Boolean);
         const isPersonal = code !== "" && unlimited.includes(code.toUpperCase());
-        if (!isPersonal) {
+        // Codes à quota : QUOTA_CODES = "CODE=5,AUTRE=3" ; utilisations comptées dans le KV USAGE
+        const quotas = {};
+        String(env.QUOTA_CODES || "").split(",").forEach((p) => {
+          const [c, n] = p.split("=").map((s) => String(s || "").trim());
+          if (c && parseInt(n, 10) > 0) quotas[c.toUpperCase()] = parseInt(n, 10);
+        });
+        const quotaKey = !isPersonal && code && quotas[code.toUpperCase()] && env.USAGE ? "quota:" + code.toUpperCase() : null;
+        let quota = null;
+        if (quotaKey) {
+          const used = parseInt((await env.USAGE.get(quotaKey)) || "0", 10) || 0;
+          const max = quotas[code.toUpperCase()];
+          if (used >= max) return json({ error: "Ce code a déjà été utilisé pour toutes les analyses incluses." }, 401);
+          quota = { used, max };
+        }
+        if (!isPersonal && !quota) {
           if (!env.PAYHIP_SECRET) {
             if (unlimited.length) return json({ error: "Code d'accès incorrect." }, 401);
           } else {
@@ -159,6 +175,10 @@ export default {
           return json({ error: "L'agent n'a pas pu être contacté." }, 502);
         }
         let remaining = null;
+        if (quota) {
+          await env.USAGE.put(quotaKey, String(quota.used + 1));
+          remaining = Math.max(0, quota.max - quota.used - 1);
+        }
         if (payhip && payhip.ok) {
           await consumePayhipKey(env, code);
           remaining = Math.max(0, payhip.max - payhip.uses - 1);
