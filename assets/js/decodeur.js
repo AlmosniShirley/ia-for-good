@@ -114,7 +114,7 @@
     if (val("environnement")) infos.push("### Ce dont j'ai besoin pour bien travailler\n" + clean(val("environnement")));
     parts.push("## 3. Informations complémentaires\n" + (infos.length ? infos.join("\n") : "Aucune information complémentaire fournie."));
 
-    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et % de matching), puis respecte ta structure en 16 points, ni plus ni moins : une section de niveau 2 (##) par point, numérotée de 1 à 16, le point 16 étant « Ce qu'il faut éviter ». Si tu proposes des questions à poser en entretien, intègre-les dans le point 16 au lieu d'ajouter une section. Au point 6 (Red Flags), présente les red flags sous forme d'un tableau Markdown avec exactement ces en-têtes de colonnes : Red flag | Pattern | Gravité | Indices relevés | Conséquences possibles (la colonne Gravité contient seulement « faible », « moyenne » ou « forte ») ; une ligne par red flag, puis quelques lignes de commentaire si nécessaire (cumuls, signaux non vérifiables). Au point 5, parle de « signaux publics sur la solidité de l'entreprise » en distinguant faits sourcés et hypothèses. Au point 10, présente les conditions de travail à clarifier pour différents modes de fonctionnement, sans diagnostic ni verdict de « compatibilité ». Au point 12, présente le pourcentage comme un « niveau d'adéquation estimé », en détaillant les critères utilisés ; ce n'est pas une prédiction de recrutement.");
+    parts.push("Réponds en français, en Markdown. Commence par une section « ## Synthèse » de 4 à 6 lignes (verdict global et niveau d'adéquation estimé), puis respecte ta structure en 16 points, ni plus ni moins (aucune section 17) : une section de niveau 2 (##) par point, numérotée de 1 à 16, le point 16 s'intitulant « Questions à poser en entretien et ce qu'il faut éviter » : il regroupe les questions stratégiques à poser en entretien et ce qu'il faut éviter, en deux sous-parties (###). N'ajoute pas de section « Votre demande ». Titres imposés : point 5 « Signaux publics sur la solidité de l'entreprise », point 12 « Niveau d'adéquation estimé avec votre CV et votre profil » ; n'emploie jamais l'expression « % de matching ». Au point 6 (Red Flags), présente les red flags sous forme d'un tableau Markdown avec exactement ces en-têtes de colonnes : Red flag | Pattern | Gravité | Indices relevés | Conséquences possibles (la colonne Gravité contient seulement « faible », « moyenne » ou « forte ») ; une ligne par red flag, puis quelques lignes de commentaire si nécessaire (cumuls, signaux non vérifiables). Au point 5, parle de « signaux publics sur la solidité de l'entreprise » en distinguant faits sourcés et hypothèses. Au point 10, présente les conditions de travail à clarifier pour différents modes de fonctionnement, sans diagnostic ni verdict de « compatibilité ». Au point 12, présente le pourcentage comme un « niveau d'adéquation estimé », en détaillant les critères utilisés ; ce n'est pas une prédiction de recrutement.");
     return parts.join("\n\n");
   }
 
@@ -246,9 +246,29 @@
     $("recontact-btn").closest(".recontact").hidden = !C.EMAIL;
   }
 
+  /* Remet la réponse aux normes du site, même si l'outil s'en écarte :
+     16 points exactement, vocabulaire imposé dans les titres. */
+  function normaliser(md) {
+    var lignes = md.split("\n"), aSeize = false, aDixSept = false;
+    lignes.forEach(function (l) {
+      if (/^##\s*16\.\s/.test(l)) aSeize = true;
+      if (/^##\s*17\.\s/.test(l)) aDixSept = true;
+    });
+    return lignes.map(function (l) {
+      if (!/^##\s/.test(l)) return l.replace(/%\s*de\s+matching/gi, "niveau d'adéquation estimé");
+      if (/^##\s*votre demande\s*$/i.test(l)) return "## Périmètre de l'analyse";
+      if (/^##\s*5\.\s/.test(l) && /financi|santé/i.test(l)) return "## 5. Signaux publics sur la solidité de l'entreprise";
+      if (/^##\s*10\.\s/.test(l) && /neuro|compatib/i.test(l)) return "## 10. Conditions de travail à clarifier pour différents modes de fonctionnement";
+      if (/^##\s*12\.\s/.test(l)) return "## 12. Niveau d'adéquation estimé avec votre CV et votre profil";
+      if (aSeize && aDixSept && /^##\s*16\.\s/.test(l)) return "## 16. Questions à poser en entretien et ce qu'il faut éviter\n\n### " + l.replace(/^##\s*16\.\s*/, "");
+      if (aDixSept && /^##\s*17\.\s/.test(l)) return "### " + l.replace(/^##\s*17\.\s*/, "");
+      return l;
+    }).join("\n");
+  }
+
   function showResult(markdown) {
     // Retire les marqueurs de citation internes de Dust (ex. « :cite[bpe] »)
-    markdown = String(markdown || "").replace(/[ \t]*:cite\[[^\]]*\]/g, "");
+    markdown = normaliser(String(markdown || "").replace(/[ \t]*:cite\[[^\]]*\]/g, ""));
     lastMarkdown = markdown;
     $("sum-annonce").textContent = lastRequest.annonce || "Texte collé";
     $("sum-cv").textContent = lastRequest.cv ? "Fourni" : "Non fourni (lecture partielle)";
