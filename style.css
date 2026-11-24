@@ -478,3 +478,12 @@ button.btn { cursor: pointer; font-family: inherit; }
 
 /* L’attribut hidden doit toujours l’emporter (ex. .progress en display:flex) */
 [hidden] { display: none !important; }
+.legal h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 18px; }
+.legal h2 { font-size: 1.15rem; margin: 32px 0 10px; }
+.legal p { color: var(--ink); max-width: 72ch; }
+.fiche { margin: 0; display: grid; gap: 6px; }
+.fiche div { display: grid; grid-template-columns: minmax(0, 200px) 1fr; gap: 12px; }
+.fiche dt { font-weight: 700; color: var(--ink-2); }
+.fiche dd { margin: 0; }
+@media (max-width: 560px) { .fiche div { grid-template-columns: 1fr; gap: 0; } }
+.pied-legal { font-size: .84em; margin-top: 8px; }
