@@ -1,0 +1,16 @@
+# Relais « Coach d'entretien annuel » (Cloudflare Worker) — même principe que worker/ (Décodeur)
+name = "ia-for-good-coach-entretien"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+DUST_BASE_URL = "https://dust.tt"
+# Même espace Dust que le Décodeur et Le Bon Angle
+DUST_WORKSPACE_ID = "LiNKoSV40F"
+# Identifiant de l'agent « coach d'entretien annuel »
+DUST_AGENT_ID = "zyrnE2001m"
+ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
+PAYHIP_MAX_USES = "5"
+
+# Secrets — jamais dans ce fichier (npx wrangler secret put <NOM> depuis worker-coach/) :
+#   DUST_API_KEY, ACCESS_CODE, TESTER_CODES, et plus tard PAYHIP_SECRET
