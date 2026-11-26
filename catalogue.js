@@ -141,7 +141,7 @@ window.CONTENUS = [
     description:
       "Construire les nouveaux rôles, la frontière humain–machine et les mécanismes de confiance : AI Product Manager, Context Engineer, AgentOps, gouvernance, formation, rémunération et feuille de route 90 jours.",
     payant: true,
-    prix: "5 €",
+    prix: "1,80 €",
     achat: "https://payhip.com/b/MW63r",
     extrait: "https://almosnishirley.github.io/bibliotheque-ressources/documents/extraits/design-organisationnel-ia-extrait.pdf",
     apercu: "assets/apercus/design-organisationnel-ia.jpg",
@@ -157,7 +157,7 @@ window.CONTENUS = [
     description:
       "Les métiers de l'IT à l'ère des agents IA : où se déplace la valeur, les rôles qui émergent, quatre cas clients (Back Market, SFEIR, ACS, Skello), une roadmap 90 jours et les garde-fous de confiance.",
     payant: true,
-    prix: "5 €",
+    prix: "1,80 €",
     achat: "https://payhip.com/b/vPlSC",
     extrait: "https://almosnishirley.github.io/bibliotheque-ressources/documents/extraits/developpeur-pilote-systemes-augmentes-extrait.pdf",
     apercu: "assets/apercus/developpeur-pilote-systemes-augmentes.jpg",
