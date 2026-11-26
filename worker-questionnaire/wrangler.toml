@@ -1,0 +1,31 @@
+# Relais « Questionnaire préparatoire » (Cloudflare Worker)
+# Page : questionnaire.html (non listée, réservée aux personnes accompagnées)
+name = "ia-for-good-questionnaire"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+DUST_BASE_URL = "https://dust.tt"
+DUST_WORKSPACE_ID = "LiNKoSV40F"
+# Agent qui rédige la synthèse du questionnaire
+DUST_AGENT_ID = "vRAKCeDgH3"
+ALLOWED_ORIGINS = "https://aiforgood.page,https://www.aiforgood.page,https://almosnishirley.github.io,http://localhost:8000"
+# Destinataire des documents
+EMAIL_TO = "shirley.chiche@buildrh.co"
+# Expéditeur Resend. Sans domaine vérifié chez Resend, garder onboarding@resend.dev
+# (n'envoie alors qu'à l'adresse du compte Resend : c'est voulu ici).
+EMAIL_FROM = "Questionnaire IA FOR GOOD <onboarding@resend.dev>"
+
+# Codes à usage unique + envois en attente
+[[kv_namespaces]]
+binding = "QUESTIONNAIRE"
+id = "89924800cdb346bca6713ee9a4e9c30a"
+
+# Vérifie toutes les 2 minutes si des synthèses sont prêtes, puis envoie l'e-mail
+[triggers]
+crons = ["*/2 * * * *"]
+
+# Secrets — jamais dans ce fichier (npx wrangler secret put <NOM> depuis worker-questionnaire/) :
+#   DUST_API_KEY    clé API Dust
+#   RESEND_API_KEY  clé API Resend (envoi de l'e-mail)
+#   ACCESS_CODE     code personnel de Shirley pour tester (jamais désactivé)
