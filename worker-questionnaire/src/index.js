@@ -297,6 +297,54 @@ export default {
     try {
       let body;
       try { body = await request.json(); } catch { return json({ error: "Requête invalide." }, 400); }
+
+      /* ---------- Espace de Shirley : créer, lister, désactiver des codes ---------- */
+      if (request.method === "POST" && url.pathname.startsWith("/admin/")) {
+        if (!env.ACCESS_CODE || normCode(body.admin) !== normCode(env.ACCESS_CODE)) {
+          await new Promise((r) => setTimeout(r, 1500)); // freine les essais au hasard
+          return json({ error: "Code personnel incorrect." }, 401);
+        }
+        const lien = (c) => `${(env.LIEN_QUESTIONNAIRE || "").replace(/\/$/, "")}?code=${c}`;
+
+        if (url.pathname === "/admin/create") {
+          const nom = cleanStr(body.nom, 120);
+          if (!nom) return json({ error: "Indiquez le prénom et le nom." }, 400);
+          const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+          const bytes = crypto.getRandomValues(new Uint8Array(8));
+          const s = Array.from(bytes, (b) => A[b % A.length]).join("");
+          const nouveau = `Q-${s.slice(0, 4)}-${s.slice(4)}`;
+          const info = { nom, cree: new Date().toISOString().slice(0, 10) };
+          await env.QUESTIONNAIRE.put("code:" + nouveau, JSON.stringify(info));
+          return json({ ok: true, code: nouveau, nom, lien: lien(nouveau) });
+        }
+
+        if (url.pathname === "/admin/list") {
+          const keys = [];
+          let cursor;
+          do {
+            const r = await env.QUESTIONNAIRE.list({ prefix: "code:", cursor });
+            keys.push(...r.keys.map((k) => k.name));
+            cursor = r.list_complete ? null : r.cursor;
+          } while (cursor);
+          const codes = await Promise.all(keys.map(async (k) => {
+            let info = {};
+            try { info = JSON.parse((await env.QUESTIONNAIRE.get(k)) || "{}"); } catch { info = {}; }
+            const cd = k.slice(5);
+            return { code: cd, nom: info.nom || "", cree: info.cree || "", utilise: info.utilise || "", desactive: info.desactive || "", lien: lien(cd) };
+          }));
+          codes.sort((a, b) => (b.cree || "").localeCompare(a.cree || ""));
+          return json({ ok: true, codes });
+        }
+
+        if (url.pathname === "/admin/delete") {
+          const cd = normCode(body.code);
+          if (!/^[A-Z0-9-]{4,40}$/.test(cd)) return json({ error: "Code invalide." }, 400);
+          await env.QUESTIONNAIRE.delete("code:" + cd);
+          return json({ ok: true });
+        }
+        return json({ error: "Route inconnue." }, 404);
+      }
+
       const code = normCode(body.code);
       const c = await getCode(env, code);
 
