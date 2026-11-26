@@ -108,7 +108,7 @@ window.CONTENUS = [
     description:
       "Ne demandez pas aux personnes neuroatypiques de mieux se masquer. Recruter sur le réel, onboarder sans sous-entendus, aménager avant l'épuisement, RQTH et confidentialité, manager autrement.",
     payant: true,
-    prix: "1,50 €",
+    prix: "1,80 €",
     achat: "https://payhip.com/b/QkswI",
     extrait: "https://almosnishirley.github.io/bibliotheque-ressources/documents/extraits/neuroatypies-au-travail-extrait.pdf",
     apercu: "assets/apercus/neuroatypies-au-travail.jpg",
@@ -125,7 +125,7 @@ window.CONTENUS = [
     description:
       "Ce n'est pas un défaut de volonté, c'est un autre mode de fonctionnement. Comprendre les forces, les frictions invisibles et les conditions de réussite, puis recruter et manager sans abîmer.",
     payant: true,
-    prix: "1,50 €",
+    prix: "1,80 €",
     achat: "https://payhip.com/b/gd3XQ",
     extrait: "https://almosnishirley.github.io/bibliotheque-ressources/documents/extraits/tdah-au-travail-extrait.pdf",
     apercu: "assets/apercus/tdah-au-travail.jpg",
